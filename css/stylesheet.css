@@ -1,0 +1,29 @@
+em.input-error {
+    color: #d43f3a;
+    font-style: normal;
+    font-weight: normal;
+    position: relative;
+    top: 5px;
+}
+
+main {
+    margin-bottom: 40px;
+}
+
+.navbar-brand {
+    min-width: 200px;
+    padding: 4px 10px 0 10px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+#form-cadastro {
+    padding-top: 40px;
+}
+
+#avatar {
+    margin: 10px auto;
+    display: block;
+}

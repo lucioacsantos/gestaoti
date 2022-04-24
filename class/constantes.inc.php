@@ -134,14 +134,12 @@ class Usuario
 /** Classe Órgãos Apoiados */
 class OrgaosApoiados
 {
-    public $idtb_om_apoiadas;
+    public $idtb_orgaos_apoiados;
     public $estado;
     public $cidade;
-    public $cod_om;
     public $nome;
     public $sigla;
-    public $indicativo;
-    public $idtb_om_setores;
+    public $idtb_setores_orgaos;
     public $nome_setor;
     public $sigla_setor;
     public $cod_funcional;
@@ -218,11 +216,11 @@ class OrgaosApoiados
         $row = $pg->exec($sql);
         return $row;
     }
-    public function CountOMApoiadas()
+    public function CountApoiados()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getCol("SELECT COUNT(idtb_om_apoiadas) FROM gestaoti.tb_om_apoiadas");
+        $row = $pg->getCol("SELECT COUNT(idtb_orgaos_apoiados) FROM gestaoti.tb_orgaos_apoiados");
         return $row;
     }
     public function SelectAllEstado()

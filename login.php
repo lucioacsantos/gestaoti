@@ -23,7 +23,11 @@ $msg = $_SESSION ['msg'];
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <?php echo "<link rel=\"icon\" href=\"$url/favicon.ico\">"; ?>
+    
+    <?php echo "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"img/apple-touch-icon.png\">"; ?>
+    <?php echo "<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"img/favicon-32x32.png\">"; ?>
+    <?php echo "<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"img/favicon-16x16.png\">"; ?>
+    <?php echo "<link rel=\"manifest\" href=\"img/site.webmanifest\">"; ?>
 
     <title>...::: SGTI :::...</title>
 

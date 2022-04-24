@@ -77,12 +77,14 @@ $versao = $config->SelectVersao();
                     Quadros de Situação
                   </a>
                 </li>
+                <!-- Relatórios a configurar
                 <li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/clti/?cmd=relservico\">
                     <span data-feather=\"check-square\"></span>
                     Rel. Serviço
                   </a>
                 </li>
+                -->
                 <li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/monitoramento/?cmd=monitoramento\">
                     <span data-feather=\"grid\"></span>
@@ -133,12 +135,6 @@ $versao = $config->SelectVersao();
                   <a class=\"nav-link\" href=\"$url/ativosti/?cmd=sistoperacionais\">
                     <span data-feather=\"globe\"></span>
                     Sistemas Operacionais
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=softpad\">
-                    <span data-feather=\"external-link\"></span>
-                    Softwares Padronizados
                   </a>
                 </li>
                 <li class=\"nav-item\">

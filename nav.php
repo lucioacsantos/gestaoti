@@ -79,7 +79,7 @@ $versao = $config->SelectVersao();
                 </li>
                 <!-- Relatórios a configurar
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=relservico\">
+                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=relservico\">
                     <span data-feather=\"check-square\"></span>
                     Rel. Serviço
                   </a>
@@ -92,37 +92,25 @@ $versao = $config->SelectVersao();
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=omapoiadas\">
+                  <a class=\"nav-link\" href=\"$url/apoiados\">
                     <span data-feather=\"anchor\"></span>
-                    OM Apoiadas
+                    Órgãos Apoiados
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=lotclti\">
+                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=pessoalti\">
                     <span data-feather=\"users\"></span>
-                    Lotação do CLTI
+                    Pessoal TI
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=qualificacao\">
+                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=qualificacao\">
                     <span data-feather=\"book-open\"></span>
-                    Qualificação CLTI
+                    Qualificação
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=osic\">
-                    <span data-feather=\"users\"></span>
-                    OSIC
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=admin\">
-                    <span data-feather=\"users\"></span>
-                    Admin
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/clti/?cmd=funcoesti\">
+                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=funcoesti\">
                     <span data-feather=\"crosshair\"></span>
                     Funções de TI
                   </a>

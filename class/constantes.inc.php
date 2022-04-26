@@ -137,6 +137,7 @@ class OrgaosApoiados
     public $idtb_orgaos_apoiados;
     public $estado;
     public $cidade;
+    public $cnpj;
     public $nome;
     public $sigla;
     public $idtb_setores_orgaos;
@@ -148,48 +149,48 @@ class OrgaosApoiados
     public $ip_gw;
 
     /** OM */
-    public function SelectAllOMTable()
+    public function SelectApoiados()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.tb_om_apoiadas $this->ordena");
+        $row = $pg->getRows("SELECT * FROM gestaoti.tb_orgaos_apoiados $this->ordena");
         return $row;
     }
-    public function SelectIdOMTable()
+    public function SelectApoiadosId()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRow("SELECT * FROM gestaoti.tb_om_apoiadas WHERE idtb_om_apoiadas=$this->idtb_om_apoiadas
+        $row = $pg->getRow("SELECT * FROM gestaoti.tb_orgaos_apoiados WHERE idtb_orgaos_apoiados=$this->idtb_orgaos_apoiados
         ");
         return $row;
     }
-    public function UpdateOM()
+    public function UpdateApoiados()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_om_apoiadas SET (idtb_estado,idtb_cidade,cod_om,nome, sigla, indicativo) 
-            = ('$this->estado','$this->cidade','$this->cod_om','$this->nome','$this->sigla','$this->indicativo') 
-            WHERE idtb_om_apoiadas=$this->idtb_om_apoiadas";
+        $sql = "UPDATE gestaoti.tb_orgaos_apoiados SET (idtb_estado,idtb_cidade,cnpj,nome, sigla) 
+            = ('$this->estado','$this->cidade','$this->cnpj','$this->nome','$this->sigla') 
+            WHERE idtb_orgaos_apoiados=$this->idtb_orgaos_apoiados";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function InsertOM()
+    public function InsertApoiados()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_om_apoiadas (idtb_estado,idtb_cidade,cod_om,nome, sigla, indicativo) 
-            VALUES ('$this->estado','$this->cidade','$this->cod_om','$this->nome','$this->sigla','$this->indicativo')";
+        $sql = "INSERT INTO gestaoti.tb_orgaos_apoiados (idtb_estado,idtb_cidade,cnpj,nome, sigla) 
+            VALUES ('$this->estado','$this->cidade','$this->cnpj','$this->nome','$this->sigla')";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function SelectAllSetoresView()
+    public function SelectSetores()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_setores WHERE idtb_om_apoiadas=$this->idtb_om_apoiadas $this->ordena");
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_setores WHERE idtb_orgaos_apoiados=$this->idtb_orgaos_apoiados $this->ordena");
         return $row;
     }
-    public function SelectIdSetoresView()
+    public function SelectSetoresId()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
@@ -200,8 +201,8 @@ class OrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_om_setores (idtb_om_apoiadas,nome_setor,sigla_setor,cod_funcional,compartimento) 
-            VALUES ('$this->idtb_om_apoiadas','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
+        $sql = "INSERT INTO gestaoti.tb_om_setores (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,compartimento) 
+            VALUES ('$this->idtb_orgaos_apoiados','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
             '$this->compart')";
         $row = $pg->exec($sql);
         return $row;
@@ -210,8 +211,8 @@ class OrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_om_setores SET (idtb_om_apoiadas,nome_setor,sigla_setor,cod_funcional,compartimento) 
-            = ('$this->idtb_om_apoiadas','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
+        $sql = "UPDATE gestaoti.tb_om_setores SET (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,compartimento) 
+            = ('$this->idtb_orgaos_apoiados','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
             '$this->compart') WHERE idtb_om_setores='$this->idtb_om_setores'";
         $row = $pg->exec($sql);
         return $row;
@@ -223,35 +224,35 @@ class OrgaosApoiados
         $row = $pg->getCol("SELECT COUNT(idtb_orgaos_apoiados) FROM gestaoti.tb_orgaos_apoiados");
         return $row;
     }
-    public function SelectAllEstado()
+    public function SelectEstado()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRows("SELECT * FROM gestaoti.tb_estado");
         return $row;
     }
-    public function SelectIdEstado()
+    public function SelectEstadoId()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRow("SELECT * FROM gestaoti.tb_estado WHERE id='$this->estado'");
         return $row;
     }
-    public function SelectUfEstado()
+    public function SelectEstadoUf()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getCol("SELECT id FROM gestaoti.tb_estado WHERE uf='$this->estado'");
         return $row;
     }
-    public function SelectAllCidade()
+    public function SelectCidade()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRows("SELECT * FROM gestaoti.tb_cidade");
         return $row;
     }
-    public function SelectIdCidade()
+    public function SelectCidadeId()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
@@ -277,9 +278,15 @@ class OrgaosApoiados
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->exec("UPDATE gestaoti.tb_gw_om  SET (ip_gw) = ($this->ip_gw) 
-            WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas");
+            WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados");
         return $row;
     }
+    function FormatCNPJ($value)
+    {
+        $cnpj = preg_replace("/\D/", '', $value);
+        return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cnpj);
+    }
+
 }
 
 /** Classe Pessoal TI */
@@ -536,6 +543,11 @@ class PessoalTI
         $sql = "UPDATE gestaoti.tb_pessoal_ti SET status = 'ATIVO' WHERE idtb_pessoal_ti='$this->idtb_pessoal_ti' ";
         $row = $pg->exec($sql);
         return $row;
+    }
+    function FormatCPF($value)
+    {
+        $cpf = preg_replace("/\D/", '', $value);
+        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cpf);
     }
 }
 

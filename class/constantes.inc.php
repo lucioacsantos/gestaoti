@@ -79,6 +79,7 @@ class Config
 /* Classe Usuário */
 class Usuario
 {
+    public $iduser;
     public $usuario;
     public $senha;
     public $idtb_pessoal_ti;
@@ -293,13 +294,8 @@ class OrgaosApoiados
 class PessoalTI
 {
     public $idtb_pessoal_ti;
-    public $idtb_om_apoiadas;
-    public $idtb_posto_grad;
-    public $idtb_corpo_quadro;
-    public $idtb_especialidade;
-    public $nip;
+    public $idtb_orgaos_apoiados;
     public $cpf;
-    public $nip_cpf;
     public $usuario;
     public $nome;
     public $nome_guerra;
@@ -309,22 +305,13 @@ class PessoalTI
     public $idtb_funcoes_ti;
     public $descricao;
     public $sigla;
-    public $idtb_qualificacao_ti;
-    public $nome_curso;
-    public $instituicao;
-    public $data_conclusao;
-    public $carga_horaria;
-    public $tipo;
-    public $custo;
-    public $meio;
-    public $situacao;
     public $ordena;
 
-    public function ChecaNIPCPF()
+    public function ChecaCPF()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRow("SELECT * FROM gestaoti.vw_pessoal_ti WHERE nip = '$this->usuario' OR cpf = '$this->usuario'");
+        $row = $pg->getRow("SELECT * FROM gestaoti.tb_pessoal_ti WHERE cpf = '$this->usuario'");
         return $row;
     }
     public function ChecaCorreio()
@@ -334,45 +321,30 @@ class PessoalTI
         $row = $pg->getRow("SELECT * FROM gestaoti.tb_pessoal_ti WHERE correio_eletronico = '$this->correio_eletronico'");
         return $row;
     }
-    public function SelectALLAdmin()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE sigla_funcao='ADMIN' AND status='ATIVO' 
-            $this->ordena");
-        return $row;
-    }
-    public function SelectAdminInativos()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE sigla_funcao='ADMIN' AND status='INATIVO' 
-            $this->ordena");
-        return $row;
-    }
     public function SelectIdPesTI()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRow("SELECT * FROM gestaoti.vw_pessoal_ti WHERE idtb_pessoal_ti = '$this->idtb_pessoal_ti' AND status = 'ATIVO'");
+        $row = $pg->getRow("SELECT * FROM gestaoti.vw_pessoal_ti WHERE idtb_pessoal_ti = '$this->idtb_pessoal_ti' 
+            AND status = 'ATIVO'");
         return $row;
     }
-    public function SelectIdOMPesTI()
+    public function SelectIdApoiadoPesTI()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE idtb_om_apoiadas = '$this->idtb_om_apoiadas' AND status = 'ATIVO' $this->ordena");
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE idtb_orgaos_apoiados = '$this->idtb_orgaos_apoiados'
+            AND status = 'ATIVO' $this->ordena");
         return $row;
     }
     public function InsertPesTI()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_pessoal_ti(idtb_om_apoiadas,idtb_posto_grad,idtb_corpo_quadro,
-            idtb_especialidade,nip,cpf,nome,nome_guerra,correio_eletronico,status,senha,idtb_funcoes_ti)
-            VALUES ('$this->idtb_om_apoiadas','$this->idtb_posto_grad','$this->idtb_corpo_quadro',
-            '$this->idtb_especialidade','$this->nip','$this->cpf','$this->nome','$this->nome_guerra',
-            '$this->correio_eletronico','$this->status','$this->senha','$this->idtb_funcoes_ti')";
+        $sql = "INSERT INTO gestaoti.tb_pessoal_ti(idtb_orgaos_apoiados,cpf,nome,nome_guerra,correio_eletronico,
+                status,senha,idtb_funcoes_ti)
+            VALUES ('$this->idtb_orgaos_apoiados','$this->cpf','$this->nome','$this->nome_guerra',
+                '$this->correio_eletronico','$this->status','$this->senha','$this->idtb_funcoes_ti')";
         $row = $pg->insert($sql, 'idtb_pessoal_ti');
         return $row;
     }
@@ -380,34 +352,19 @@ class PessoalTI
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_pessoal_ti SET (idtb_om_apoiadas,idtb_posto_grad,idtb_corpo_quadro,
-            idtb_especialidade,nip,cpf,nome,nome_guerra,correio_eletronico,status,idtb_funcoes_ti)
-            = ('$this->idtb_om_apoiadas','$this->idtb_posto_grad','$this->idtb_corpo_quadro','$this->idtb_especialidade',
-            '$this->nip','$this->cpf','$this->nome','$this->nome_guerra','$this->correio_eletronico','$this->status',
-            '$this->idtb_funcoes_ti') WHERE idtb_pessoal_ti='$this->idtb_pessoal_ti' ";
+        $sql = "UPDATE gestaoti.tb_pessoal_ti SET (idtb_orgaos_apoiados,cpf,nome,nome_guerra,correio_eletronico,
+                status,idtb_funcoes_ti)
+            = ('$this->idtb_orgaos_apoiados','$this->cpf','$this->nome','$this->nome_guerra','$this->correio_eletronico',
+                '$this->status','$this->idtb_funcoes_ti') WHERE idtb_pessoal_ti='$this->idtb_pessoal_ti' ";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function UpdateSenhaPesti()
+    public function UpdateSenhaPesTI()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_pessoal_ti SET senha='$this->senha' WHERE idtb_pessoal_ti='$this->idtb_pessoal_ti'";
         $row = $pg->exec($sql);
-        return $row;
-    }
-    public function SelectAllOSIC()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE sigla_funcao='OSIC' AND status='ATIVO' $this->ordena");
-        return $row;
-    }
-    public function SelectOSICInativos()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE sigla_funcao='OSIC' AND status='INATIVO' $this->ordena");
         return $row;
     }
     public function SelectAllPesTI()
@@ -417,18 +374,18 @@ class PessoalTI
         $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE status='ATIVO' $this->ordena");
         return $row;
     }
+    public function SelectPesTIInativos()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_ti WHERE status='INATIVO' $this->ordena");
+        return $row;
+    }
     public function SelectAllFuncoesTI()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRows("SELECT * FROM gestaoti.tb_funcoes_ti");
-        return $row;
-    }
-    public function SelectOutrasFuncoesTI()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.tb_funcoes_ti WHERE sigla != 'ADMIN' AND sigla != 'OSIC' ");
         return $row;
     }
     public function SelectIdFuncoesTI()
@@ -455,76 +412,21 @@ class PessoalTI
         $row = $pg->exec($sql);
         return $row;
     }
-    public function SelectAllQualif()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_qualificacao_pesti $this->ordena");
-        return $row;
-    }
-    public function SelectIdQualif()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRow("SELECT * FROM gestaoti.vw_qualificacao_pesti 
-            WHERE idtb_qualificacao_ti='$this->idtb_qualificacao_ti'");
-        return $row;
-    }
-    public function InsertQualif()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_qualificacao_ti(idtb_pessoal_ti, instituicao, tipo, nome_curso, 
-            meio, situacao, data_conclusao, carga_horaria, custo) VALUES ('$this->idtb_pessoal_ti', 
-            '$this->instituicao', '$this->tipo', '$this->nome_curso','$this->meio', '$this->situacao', 
-            '$this->data_conclusao', '$this->carga_horaria', '$this->custo')";
-        $row = $pg->exec($sql);
-        return $row;
-    }
-    public function UpdateQualif()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_qualificacao_ti SET (idtb_pessoal_ti, instituicao, tipo, nome_curso, 
-            meio, situacao, data_conclusao, carga_horaria, custo) = ('$this->idtb_pessoal_ti', 
-            '$this->instituicao', '$this->tipo', '$this->nome_curso','$this->meio', '$this->situacao', 
-            '$this->data_conclusao', '$this->carga_horaria', '$this->custo')";
-        $row = $pg->exec($sql);
-        return $row;
-    }
-    public function CountAdmin()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $sql = "SELECT COUNT(idtb_pessoal_ti) AS qtde FROM gestaoti.vw_pessoal_ti GROUP BY idtb_funcoes_ti 
-            HAVING idtb_funcoes_ti=1 ";
-        $row = $pg->getCol($sql);
-        return $row;
-    }
-    public function CountOSIC()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $sql = "SELECT COUNT(idtb_pessoal_ti) AS qtde FROM gestaoti.vw_pessoal_ti GROUP BY idtb_funcoes_ti 
-            HAVING idtb_funcoes_ti=2 ";
-        $row = $pg->getCol($sql);
-        return $row;
-    }
     public function CountPesTI()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "SELECT COUNT(idtb_pessoal_ti) AS qtde FROM gestaoti.vw_pessoal_ti GROUP BY idtb_funcoes_ti 
+        $sql = "SELECT COUNT(idtb_pessoal_ti) AS qtde FROM gestaoti.tb_pessoal_ti GROUP BY idtb_funcoes_ti 
             HAVING idtb_funcoes_ti!=1 AND idtb_funcoes_ti!=2 ";
         $row = $pg->getCol($sql);
         return $row;
     }
-    public function CountPesTIOM()
+    public function CountPesTIApoiados()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "SELECT COUNT(idtb_pessoal_ti) AS qtde FROM gestaoti.vw_pessoal_ti 
-            WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas ";
+        $sql = "SELECT COUNT(idtb_pessoal_ti) AS qtde FROM gestaoti.tb_pessoal_ti 
+            WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados ";
         $row = $pg->getCol($sql);
         return $row;
     }
@@ -555,7 +457,7 @@ class PessoalTI
 class PessoalOrgaosApoiados
 {
     public $idtb_pessoal_om;
-    public $idtb_om_apoiadas;
+    public $idtb_orgaos_apoiados;
     public $idtb_posto_grad;
     public $idtb_corpo_quadro;
     public $idtb_especialidade;
@@ -598,9 +500,9 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_pessoal_om(idtb_om_apoiadas,idtb_posto_grad,idtb_corpo_quadro,
+        $sql = "INSERT INTO gestaoti.tb_pessoal_om(idtb_orgaos_apoiados,idtb_posto_grad,idtb_corpo_quadro,
             idtb_especialidade,nip,cpf,nome,nome_guerra,correio_eletronico,foradaareati,status)
-            VALUES ('$this->idtb_om_apoiadas','$this->idtb_posto_grad','$this->idtb_corpo_quadro',
+            VALUES ('$this->idtb_orgaos_apoiados','$this->idtb_posto_grad','$this->idtb_corpo_quadro',
             '$this->idtb_especialidade','$this->nip','$this->cpf','$this->nome','$this->nome_guerra',
             '$this->correio_eletronico','$this->foradaareati','$this->status')";
         $row = $pg->exec($sql);
@@ -610,9 +512,9 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_pessoal_om SET (idtb_om_apoiadas,idtb_posto_grad,idtb_corpo_quadro,
+        $sql = "UPDATE gestaoti.tb_pessoal_om SET (idtb_orgaos_apoiados,idtb_posto_grad,idtb_corpo_quadro,
             idtb_especialidade,nip,cpf,nome,nome_guerra,correio_eletronico,foradaareati,status)
-            = ('$this->idtb_om_apoiadas','$this->idtb_posto_grad','$this->idtb_corpo_quadro','$this->idtb_especialidade',
+            = ('$this->idtb_orgaos_apoiados','$this->idtb_posto_grad','$this->idtb_corpo_quadro','$this->idtb_especialidade',
             '$this->nip','$this->cpf','$this->nome','$this->nome_guerra','$this->correio_eletronico','$this->foradaareati','$this->status') 
             WHERE idtb_pessoal_om='$this->idtb_pessoal_om' ";
         $row = $pg->exec($sql);
@@ -629,7 +531,7 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_om WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas 
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_pessoal_om WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados 
             AND status='ATIVO' $this->ordena");
         return $row;
     }
@@ -637,7 +539,7 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "SELECT COUNT(idtb_pessoal_om) AS qtde FROM gestaoti.vw_pessoal_om GROUP BY idtb_om_apoiadas 
+        $sql = "SELECT COUNT(idtb_pessoal_om) AS qtde FROM gestaoti.vw_pessoal_om GROUP BY idtb_orgaos_apoiados 
             HAVING status='ATIVO' ";
         $row = $pg->exec($sql);
         return $row;
@@ -647,7 +549,7 @@ class PessoalOrgaosApoiados
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "SELECT COUNT(idtb_pessoal_om) AS qtde FROM gestaoti.vw_pessoal_om WHERE status='ATIVO' AND
-            idtb_om_apoiadas = $this->idtb_om_apoiadas";
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
         $row = $pg->getCol($sql);
         return $row;
     }
@@ -656,7 +558,7 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "SELECT * FROM gestaoti.vw_controle_internet ORDER BY idtb_om_apoiadas";
+        $sql = "SELECT * FROM gestaoti.vw_controle_internet ORDER BY idtb_orgaos_apoiados";
         $row = $pg->getRows($sql);
         return $row;
     }
@@ -664,7 +566,7 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "SELECT * FROM gestaoti.vw_controle_internet WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas";
+        $sql = "SELECT * FROM gestaoti.vw_controle_internet WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
         $row = $pg->getRows($sql);
         return $row;
     }
@@ -680,8 +582,8 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_controle_internet(idtb_om_apoiadas,idtb_pessoal_om,perfis)
-            VALUES ('$this->idtb_om_apoiadas','$this->idtb_pessoal_om','$this->perfis')";
+        $sql = "INSERT INTO gestaoti.tb_controle_internet(idtb_orgaos_apoiados,idtb_pessoal_om,perfis)
+            VALUES ('$this->idtb_orgaos_apoiados','$this->idtb_pessoal_om','$this->perfis')";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -689,8 +591,8 @@ class PessoalOrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_controle_internet SET (idtb_om_apoiadas,idtb_pessoal_om,perfis)
-            = ('$this->idtb_om_apoiadas','$this->idtb_pessoal_om','$this->perfis') 
+        $sql = "UPDATE gestaoti.tb_controle_internet SET (idtb_orgaos_apoiados,idtb_pessoal_om,perfis)
+            = ('$this->idtb_orgaos_apoiados','$this->idtb_pessoal_om','$this->perfis') 
             WHERE idtb_controle_internet='$this->idtb_controle_internet' ";
         $row = $pg->exec($sql);
         return $row;
@@ -702,7 +604,7 @@ class Conectividade
 {
     public $idtb_conectividade;
     public $ordena;
-    public $idtb_om_apoiadas;
+    public $idtb_orgaos_apoiados;
     public $fabricante;
     public $modelo;
     public $nome;
@@ -724,8 +626,8 @@ class Conectividade
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_conectividade SET (idtb_om_apoiadas, fabricante, modelo, nome, qtde_portas, end_ip, 
-            idtb_om_setores, data_aquisicao, data_garantia, status) = ('$this->idtb_om_apoiadas', '$this->fabricante', 
+        $sql = "UPDATE gestaoti.tb_conectividade SET (idtb_orgaos_apoiados, fabricante, modelo, nome, qtde_portas, end_ip, 
+            idtb_om_setores, data_aquisicao, data_garantia, status) = ('$this->idtb_orgaos_apoiados', '$this->fabricante', 
             '$this->modelo', '$this->nome', '$this->qtde_portas', '$this->end_ip', '$this->idtb_om_setores', 
             '$this->data_aquisicao', '$this->data_garantia', '$this->status') 
             WHERE idtb_conectividade='$this->idtb_conectividade'";
@@ -736,8 +638,8 @@ class Conectividade
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_conectividade(idtb_om_apoiadas, fabricante, modelo, nome, qtde_portas, end_ip, 
-            idtb_om_setores, data_aquisicao, data_garantia, status) VALUES ('$this->idtb_om_apoiadas', '$this->fabricante', 
+        $sql = "INSERT INTO gestaoti.tb_conectividade(idtb_orgaos_apoiados, fabricante, modelo, nome, qtde_portas, end_ip, 
+            idtb_om_setores, data_aquisicao, data_garantia, status) VALUES ('$this->idtb_orgaos_apoiados', '$this->fabricante', 
             '$this->modelo', '$this->nome', '$this->qtde_portas', '$this->end_ip', '$this->idtb_om_setores', 
             '$this->data_aquisicao', '$this->data_garantia', '$this->status')";
         $row = $pg->exec($sql);
@@ -761,14 +663,14 @@ class Conectividade
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_conectividade WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas");
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_conectividade WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados");
         return $row;
     }
     public function SelectFiltroAllOMConectView()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_conectividade WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_conectividade WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados
             AND idtb_conectividade != $this->idtb_conectividade");
         return $row;
     }
@@ -785,7 +687,7 @@ class Conectividade
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "SELECT COUNT(idtb_conectividade) AS qtde FROM gestaoti.vw_conectividade WHERE 
-            idtb_om_apoiadas = $this->idtb_om_apoiadas";
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
         $row = $pg->getCol($sql);
         return $row;
     }
@@ -796,7 +698,7 @@ class MapaInfra
 {
     public $idtb_mapainfra;
     public $ordena;
-    public $idtb_om_apoiadas;
+    public $idtb_orgaos_apoiados;
     public $idtb_conectividade;
     public $idtb_conectividade_orig;
     public $idtb_conectividade_dest;
@@ -828,9 +730,9 @@ class MapaInfra
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_mapainfra(idtb_conectividade_orig, idtb_servidores_dest, porta_orig, idtb_om_apoiadas) 
+        $sql = "INSERT INTO gestaoti.tb_mapainfra(idtb_conectividade_orig, idtb_servidores_dest, porta_orig, idtb_orgaos_apoiados) 
             VALUES ('$this->idtb_conectividade_orig', '$this->idtb_servidores_dest', '$this->porta_orig',
-            '$this->idtb_om_apoiadas')";
+            '$this->idtb_orgaos_apoiados')";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -838,9 +740,9 @@ class MapaInfra
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_mapainfra(idtb_conectividade_orig, idtb_estacoes_dest, porta_orig, idtb_om_apoiadas) 
+        $sql = "INSERT INTO gestaoti.tb_mapainfra(idtb_conectividade_orig, idtb_estacoes_dest, porta_orig, idtb_orgaos_apoiados) 
             VALUES ('$this->idtb_conectividade_orig','$this->idtb_estacoes_dest', '$this->porta_orig', 
-            '$this->idtb_om_apoiadas')";
+            '$this->idtb_orgaos_apoiados')";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -849,9 +751,9 @@ class MapaInfra
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_mapainfra(idtb_conectividade_orig, idtb_conectividade_dest, porta_orig, 
-            porta_dest, idtb_om_apoiadas) 
+            porta_dest, idtb_orgaos_apoiados) 
             VALUES ('$this->idtb_conectividade_orig','$this->idtb_conectividade_dest', '$this->porta_orig', 
-            '$this->porta_dest','$this->idtb_om_apoiadas')";
+            '$this->porta_dest','$this->idtb_orgaos_apoiados')";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -873,7 +775,7 @@ class MapaInfra
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_mapainfra WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas");
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_mapainfra WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados");
         return $row;
     }
     public function ChecaET()
@@ -934,7 +836,7 @@ class Estacoes
 {
     public $idtb_estacoes;
     public $ordena;
-    public $idtb_om_apoiadas;
+    public $idtb_orgaos_apoiados;
     public $fabricante;
     public $modelo;
     public $nome;
@@ -970,10 +872,10 @@ class Estacoes
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_estacoes SET
-            (idtb_om_apoiadas, fabricante, modelo, nome, end_ip, idtb_om_setores, data_aquisicao, data_garantia,
+            (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_om_setores, data_aquisicao, data_garantia,
             idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor,
             req_minimos, status) = 
-            ('$this->idtb_om_apoiadas', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
+            ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
             '$this->idtb_om_setores', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
             '$this->clock_proc', '$this->idtb_memorias', '$this->memoria', '$this->armazenamento', '$this->end_mac', 
             '$this->idtb_sor','$this->req_minimos', '$this->status') WHERE idtb_estacoes='$this->idtb_estacoes'";
@@ -985,10 +887,10 @@ class Estacoes
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_estacoes
-            (idtb_om_apoiadas, fabricante, modelo, nome, end_ip, idtb_om_setores, data_aquisicao, data_garantia,
+            (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_om_setores, data_aquisicao, data_garantia,
             idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor,
             req_minimos, status) VALUES 
-            ('$this->idtb_om_apoiadas', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
+            ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
             '$this->idtb_om_setores', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
             '$this->clock_proc', '$this->idtb_memorias', '$this->memoria', '$this->armazenamento', '$this->end_mac', 
             '$this->idtb_sor', '$this->req_minimos', '$this->status')";
@@ -1013,14 +915,14 @@ class Estacoes
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_estacoes WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_estacoes WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados
             $this->ordena ");
         return $row;
     }
     public function SelectMntAbertoET(){
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.tb_manutencao_et WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas");
+        $row = $pg->getRows("SELECT * FROM gestaoti.tb_manutencao_et WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados");
         return $row;
     }
     public function SelectIdMntET(){
@@ -1033,8 +935,8 @@ class Estacoes
     public function InsertMntET(){
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_manutencao_et (idtb_estacoes,idtb_om_apoiadas,data_entrada,diagnostico,
-            custo_manutencao,situacao) VALUES ('$this->idtb_estacoes','$this->idtb_om_apoiadas','$this->data_entrada',
+        $sql = "INSERT INTO gestaoti.tb_manutencao_et (idtb_estacoes,idtb_orgaos_apoiados,data_entrada,diagnostico,
+            custo_manutencao,situacao) VALUES ('$this->idtb_estacoes','$this->idtb_orgaos_apoiados','$this->data_entrada',
             '$this->diagnostico','$this->custo_manutencao','$this->situacao')";
         $row = $pg->exec($sql);
         return $row;
@@ -1069,7 +971,7 @@ class Estacoes
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "SELECT COUNT(idtb_estacoes) AS qtde FROM gestaoti.vw_estacoes WHERE status!='RESSALVA' AND
-            idtb_om_apoiadas = $this->idtb_om_apoiadas";
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
         $row = $pg->getCol($sql);
         return $row;
     }
@@ -1080,7 +982,7 @@ class Servidores
 {
     public $idtb_servidores;
     public $ordena;
-    public $idtb_om_apoiadas;
+    public $idtb_orgaos_apoiados;
     public $fabricante;
     public $modelo;
     public $nome;
@@ -1112,10 +1014,10 @@ class Servidores
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_servidores SET 
-            (idtb_om_apoiadas, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
+            (idtb_orgaos_apoiados, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
             armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_om_setores, 
             status) = 
-            ('$this->idtb_om_apoiadas', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
+            ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
             '$this->clock_proc','$this->qtde_proc', '$this->memoria', '$this->armazenamento','$this->end_ip', 
             '$this->end_mac', '$this->idtb_sor', '$this->finalidade','$this->data_aquisicao', 
             '$this->data_garantia', '$this->idtb_om_setores', '$this->status')
@@ -1128,10 +1030,10 @@ class Servidores
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_servidores
-            (idtb_om_apoiadas, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
+            (idtb_orgaos_apoiados, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
             armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_om_setores, 
             status) VALUES 
-            ('$this->idtb_om_apoiadas', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
+            ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
             '$this->clock_proc','$this->qtde_proc', '$this->memoria', '$this->armazenamento','$this->end_ip', 
             '$this->end_mac', '$this->idtb_sor', '$this->finalidade','$this->data_aquisicao', 
             '$this->data_garantia', '$this->idtb_om_setores', '$this->status')";
@@ -1156,7 +1058,7 @@ class Servidores
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_servidores WHERE idtb_om_apoiadas = $this->idtb_om_apoiadas");
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_servidores WHERE idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados");
         return $row;
     }
     public function CountSrv()
@@ -1172,7 +1074,7 @@ class Servidores
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "SELECT COUNT(idtb_servidores) AS qtde FROM gestaoti.vw_servidores WHERE status='EM PRODUÇÃO' AND
-            idtb_om_apoiadas = $this->idtb_om_apoiadas";
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
         $row = $pg->getCol($sql);
         return $row;
     }
@@ -1449,8 +1351,8 @@ class Contadores{
     public function CountConect($condicao){
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT COUNT(idtb_conectividade) as cont, idtb_om_apoiadas, sigla  FROM gestaoti.vw_conectividade 
-            WHERE status ='EM PRODUÇÃO' $condicao GROUP BY idtb_om_apoiadas,sigla");
+        $row = $pg->getRows("SELECT COUNT(idtb_conectividade) as cont, idtb_orgaos_apoiados, sigla  FROM gestaoti.vw_conectividade 
+            WHERE status ='EM PRODUÇÃO' $condicao GROUP BY idtb_orgaos_apoiados,sigla");
         return $row;
     }
     public function CountTotalConect($condicao){
@@ -1484,14 +1386,14 @@ class Contadores{
     public function CountPessTI($condicao){
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT COUNT(idtb_pessoal_ti) as cont, sigla_om  FROM gestaoti.vw_pessoal_ti 
+        $row = $pg->getRows("SELECT COUNT(idtb_pessoal_ti) as cont, sigla_om  FROM gestaoti.tb_pessoal_ti 
             WHERE status ='ATIVO' $condicao GROUP BY sigla_om ");
         return $row;
     }
     public function CountTotalPessTI($condicao){
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getCol("SELECT COUNT(idtb_pessoal_ti) FROM gestaoti.vw_pessoal_ti WHERE status ='ATIVO' $condicao");
+        $row = $pg->getCol("SELECT COUNT(idtb_pessoal_ti) FROM gestaoti.tb_pessoal_ti WHERE status ='ATIVO' $condicao");
         return $row;
     }
     public function CountQualiTI($condicao){

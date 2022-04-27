@@ -45,7 +45,7 @@ if ($act == 'cad') {
         <div class=\"row\">
             <main>
                 <div id=\"form-cadastro\">
-                    <form id=\"insertom\" action=\"?&act=insert\" method=\"post\" enctype=\"multipart/form-data\">
+                    <form id=\"insertom\" action=\"?cmd=apoiados&act=insert\" method=\"post\" enctype=\"multipart/form-data\">
                         <fieldset>
                             <legend>Órgãos Apoiados - Cadastro</legend>
 
@@ -112,7 +112,7 @@ if (($row) AND ($act == NULL)) {
                         <th scope=\"row\">".$apoiados->FormatCNPJ($value->cnpj)."</th>
                         <td>".$value->nome."</td>
                         <td>".$value->sigla."</td>
-                        <td><a href=\"?&act=cad&param=".$value->idtb_orgaos_apoiados."\">Editar</a> - 
+                        <td><a href=\"?cmd=apoiados&act=cad&param=".$value->idtb_orgaos_apoiados."\">Editar</a> - 
                             Excluir</td>
                     </tr>";
     };
@@ -140,7 +140,7 @@ if ($act == 'insert') {
             $row = $apoiados->UpdateApoiados();
             if ($row) {
                 echo "<h5>Resgistros incluídos no banco de dados.</h5>
-                    <meta http-equiv=\"refresh\" content=\"1;url=?cmd=omapoiadas\">";
+                    <meta http-equiv=\"refresh\" content=\"1;url=?cmd=apoiados\">";
             }    
             else {
                 echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
@@ -153,7 +153,7 @@ if ($act == 'insert') {
             $row = $apoiados->InsertApoiados();
             if ($row) {
                 echo "<h5>Resgistros incluídos no banco de dados.</h5>
-                    <meta http-equiv=\"refresh\" content=\"1;url=?cmd=omapoiadas\">";
+                    <meta http-equiv=\"refresh\" content=\"1;url=?cmd=apoiados\">";
             }
     
             else {

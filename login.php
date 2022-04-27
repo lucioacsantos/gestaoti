@@ -74,9 +74,10 @@ if ($act == NULL){
 /* Método Login */
 if ($act == 'login') {
   $usr = new Usuario();
-  $usr->usuario = $_POST['usuario'];
+  $usuario = $_POST['usuario'];
+  $usr->usuario = $usuario;
   $hash = sha1(md5($_POST['senha']));
-  $salt = sha1(md5($usr->usuario));
+  $salt = sha1(md5($usuario));
   $senha = $salt.$hash;
   $usr->senha = $senha;
 

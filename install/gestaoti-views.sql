@@ -1,4 +1,4 @@
--- gestaoti.vw_conectividade source
+/*-- gestaoti.vw_conectividade source
 
 
 CREATE OR REPLACE VIEW gestaoti.vw_conectividade
@@ -75,34 +75,6 @@ ALTER TABLE gestaoti.vw_estacoes OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_estacoes TO gestaoti;
 
 
--- gestaoti.vw_funcoes_sigdem source
-
-CREATE OR REPLACE VIEW gestaoti.vw_funcoes_sigdem
-AS SELECT funcsigdem.idtb_funcoes_sigdem,
-    funcsigdem.idtb_orgaos_apoiados,
-    funcsigdem.descricao,
-    funcsigdem.sigla,
-    funcsigdem.idtb_pessoal_om,
-    posto_grad.sigla AS posto_grad,
-    corpo_quadro.sigla AS corpo_quadro,
-    corpo_quadro.exibir AS exibir_corpo_quadro,
-    espec.sigla AS espec,
-    espec.exibir AS exibir_espec,
-    pesom.nome_guerra
-   FROM gestaoti.tb_funcoes_sigdem funcsigdem,
-    gestaoti.tb_pessoal_om pesom,
-    gestaoti.tb_posto_grad posto_grad,
-    gestaoti.tb_corpo_quadro corpo_quadro,
-    gestaoti.tb_especialidade espec,
-    gestaoti.tb_orgaos_apoiados om
-  WHERE funcsigdem.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND funcsigdem.idtb_pessoal_om = pesom.idtb_pessoal_om AND pesom.idtb_posto_grad = posto_grad.idtb_posto_grad AND pesom.idtb_corpo_quadro = corpo_quadro.idtb_corpo_quadro AND pesom.idtb_especialidade = espec.idtb_especialidade;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_funcoes_sigdem OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_funcoes_sigdem TO gestaoti;
-
-
 -- gestaoti.vw_mapainfra source
 
 CREATE OR REPLACE VIEW gestaoti.vw_mapainfra
@@ -127,71 +99,6 @@ AS SELECT mapa.idtb_mapainfra,
 
 ALTER TABLE gestaoti.vw_mapainfra OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_mapainfra TO gestaoti;
-
-
--- gestaoti.vw_osic source
-
-CREATE OR REPLACE VIEW gestaoti.vw_osic
-AS SELECT osic.idtb_osic,
-    osic.idtb_posto_grad,
-    posto.sigla AS sigla_posto_grad,
-    osic.idtb_corpo_quadro,
-    corpo.sigla AS sigla_corpo_quadro,
-    corpo.exibir AS exibir_corpo_quadro,
-    osic.idtb_especialidade,
-    espec.sigla AS sigla_espec,
-    espec.exibir AS exibir_espec,
-    osic.idtb_orgaos_apoiados,
-    om.sigla AS sigla_om,
-    osic.nip,
-    osic.cpf,
-    osic.nome,
-    osic.nome_guerra,
-    osic.correio_eletronico,
-    osic.perfil,
-    osic.status
-   FROM gestaoti.tb_osic osic,
-    gestaoti.tb_posto_grad posto,
-    gestaoti.tb_corpo_quadro corpo,
-    gestaoti.tb_especialidade espec,
-    gestaoti.tb_orgaos_apoiados om
-  WHERE osic.idtb_posto_grad = posto.idtb_posto_grad AND osic.idtb_corpo_quadro = corpo.idtb_corpo_quadro AND osic.idtb_especialidade = espec.idtb_especialidade AND osic.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_osic OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_osic TO gestaoti;
-
-
--- gestaoti.vw_pessoal_clti source
-
-CREATE OR REPLACE VIEW gestaoti.vw_pessoal_clti
-AS SELECT clti.idtb_lotacao_clti,
-    clti.idtb_posto_grad,
-    posto.sigla AS sigla_posto_grad,
-    clti.idtb_corpo_quadro,
-    corpo.sigla AS sigla_corpo_quadro,
-    corpo.exibir AS exibir_corpo_quadro,
-    clti.idtb_especialidade,
-    espec.sigla AS sigla_espec,
-    espec.exibir AS exibir_espec,
-    clti.nip,
-    clti.cpf,
-    clti.nome,
-    clti.nome_guerra,
-    clti.correio_eletronico,
-    clti.perfil,
-    clti.status
-   FROM gestaoti.tb_lotacao_clti clti,
-    gestaoti.tb_posto_grad posto,
-    gestaoti.tb_corpo_quadro corpo,
-    gestaoti.tb_especialidade espec
-  WHERE clti.idtb_posto_grad = posto.idtb_posto_grad AND clti.idtb_corpo_quadro = corpo.idtb_corpo_quadro AND clti.idtb_especialidade = espec.idtb_especialidade;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_pessoal_clti OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_pessoal_clti TO gestaoti;
 
 
 -- gestaoti.vw_pessoal_om source
@@ -226,24 +133,15 @@ CREATE OR REPLACE VIEW db_clti.vw_pessoal_om
 -- Permissions
 
 ALTER TABLE gestaoti.vw_pessoal_om OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_pessoal_om TO gestaoti;
+GRANT ALL ON TABLE gestaoti.vw_pessoal_om TO gestaoti;*/
 
 
 -- gestaoti.vw_pessoal_ti source
 
 CREATE OR REPLACE VIEW gestaoti.vw_pessoal_ti
 AS SELECT pesti.idtb_pessoal_ti,
-    pesti.idtb_posto_grad,
-    posto.sigla AS sigla_posto_grad,
-    pesti.idtb_corpo_quadro,
-    corpo.sigla AS sigla_corpo_quadro,
-    corpo.exibir AS exibir_corpo_quadro,
-    pesti.idtb_especialidade,
-    espec.sigla AS sigla_espec,
-    espec.exibir AS exibir_espec,
     pesti.idtb_orgaos_apoiados,
-    om.sigla AS sigla_om,
-    pesti.nip,
+    apoiados.sigla AS sigla_apoiados,
     pesti.cpf,
     pesti.nome,
     pesti.nome_guerra,
@@ -253,12 +151,9 @@ AS SELECT pesti.idtb_pessoal_ti,
     funcao.sigla AS sigla_funcao,
     pesti.status
    FROM gestaoti.tb_pessoal_ti pesti,
-    gestaoti.tb_posto_grad posto,
-    gestaoti.tb_corpo_quadro corpo,
-    gestaoti.tb_especialidade espec,
-    gestaoti.tb_orgaos_apoiados om,
+    gestaoti.tb_orgaos_apoiados apoiados,
     gestaoti.tb_funcoes_ti funcao
-  WHERE pesti.idtb_posto_grad = posto.idtb_posto_grad AND pesti.idtb_corpo_quadro = corpo.idtb_corpo_quadro AND pesti.idtb_especialidade = espec.idtb_especialidade AND pesti.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND pesti.idtb_funcoes_ti = funcao.idtb_funcoes_ti;
+  WHERE pesti.idtb_orgaos_apoiados = apoiados.idtb_orgaos_apoiados AND pesti.idtb_funcoes_ti = funcao.idtb_funcoes_ti;
 
 -- Permissions
 
@@ -266,7 +161,7 @@ ALTER TABLE gestaoti.vw_pessoal_ti OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_pessoal_ti TO gestaoti;
 
 
--- gestaoti.vw_processadores source
+/*-- gestaoti.vw_processadores source
 
 CREATE OR REPLACE VIEW gestaoti.vw_processadores
 AS SELECT fab.idtb_proc_fab,
@@ -281,83 +176,6 @@ AS SELECT fab.idtb_proc_fab,
 
 ALTER TABLE gestaoti.vw_processadores OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_processadores TO gestaoti;
-
-
--- gestaoti.vw_qualificacao_clti source
-
-CREATE OR REPLACE VIEW gestaoti.vw_qualificacao_clti
-AS SELECT quali.idtb_qualificacao_clti,
-    quali.idtb_lotacao_clti,
-    pesti.idtb_posto_grad,
-    posto.sigla AS sigla_posto_grad,
-    pesti.idtb_corpo_quadro,
-    corpo.sigla AS sigla_corpo_quadro,
-    corpo.exibir AS exibir_corpo_quadro,
-    pesti.idtb_especialidade,
-    espec.sigla AS sigla_espec,
-    espec.exibir AS exibir_espec,
-    pesti.nome_guerra,
-    pesti.nip,
-    pesti.cpf,
-    quali.instituicao,
-    quali.tipo,
-    quali.nome_curso,
-    quali.meio,
-    quali.situacao,
-    quali.data_conclusao,
-    quali.carga_horaria,
-    quali.custo
-   FROM gestaoti.tb_qualificacao_clti quali,
-    gestaoti.tb_lotacao_clti pesti,
-    gestaoti.tb_posto_grad posto,
-    gestaoti.tb_corpo_quadro corpo,
-    gestaoti.tb_especialidade espec
-  WHERE quali.idtb_lotacao_clti = pesti.idtb_lotacao_clti AND pesti.idtb_posto_grad = posto.idtb_posto_grad AND pesti.idtb_corpo_quadro = corpo.idtb_corpo_quadro AND pesti.idtb_especialidade = espec.idtb_especialidade;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_qualificacao_clti OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_qualificacao_clti TO gestaoti;
-
-
--- gestaoti.vw_qualificacao_pesti source
-
-CREATE OR REPLACE VIEW gestaoti.vw_qualificacao_pesti
-AS SELECT quali.idtb_qualificacao_ti,
-    quali.idtb_pessoal_ti,
-    pesti.idtb_posto_grad,
-    posto.sigla AS sigla_posto_grad,
-    pesti.idtb_corpo_quadro,
-    corpo.sigla AS sigla_corpo_quadro,
-    corpo.exibir AS exibir_corpo_quadro,
-    pesti.idtb_especialidade,
-    espec.sigla AS sigla_espec,
-    espec.exibir AS exibir_espec,
-    pesti.idtb_orgaos_apoiados,
-    om.sigla AS sigla_om,
-    pesti.nome_guerra,
-    pesti.nip,
-    pesti.cpf,
-    quali.instituicao,
-    quali.tipo,
-    quali.nome_curso,
-    quali.meio,
-    quali.situacao,
-    quali.data_conclusao,
-    quali.carga_horaria,
-    quali.custo
-   FROM gestaoti.tb_qualificacao_ti quali,
-    gestaoti.tb_pessoal_ti pesti,
-    gestaoti.tb_posto_grad posto,
-    gestaoti.tb_corpo_quadro corpo,
-    gestaoti.tb_especialidade espec,
-    gestaoti.tb_orgaos_apoiados om
-  WHERE quali.idtb_pessoal_ti = pesti.idtb_pessoal_ti AND pesti.idtb_posto_grad = posto.idtb_posto_grad AND pesti.idtb_corpo_quadro = corpo.idtb_corpo_quadro AND pesti.idtb_especialidade = espec.idtb_especialidade AND pesti.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_qualificacao_pesti OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_qualificacao_pesti TO gestaoti;
 
 
 -- gestaoti.vw_servidores source
@@ -422,45 +240,4 @@ AS SELECT setores.idtb_setores_orgaos,
 -- Permissions
 
 ALTER TABLE gestaoti.vw_setores OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_setores TO gestaoti;
-
--- gestaoti.vw_controle_internet source
-
-CREATE OR REPLACE VIEW gestaoti.vw_controle_internet
-AS SELECT internet.idtb_controle_internet,
-    internet.idtb_orgaos_apoiados,
-    om.sigla,
-    internet.idtb_pessoal_om,
-    pesom.posto_grad,
-    pesom.corpo_quadro,
-    pesom.exibir_corpo_quadro,
-    pesom.espec,
-    pesom.exibir_espec,
-    pesom.nip,
-    pesom.nome,
-    pesom.nome_guerra,
-    internet.perfis
-   FROM gestaoti.tb_controle_internet internet,
-    gestaoti.vw_pessoal_om pesom,
-    gestaoti.tb_orgaos_apoiados om
-  WHERE internet.idtb_pessoal_om = pesom.idtb_pessoal_om AND internet.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_controle_internet OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_controle_internet TO gestaoti;
-
-
--- REVISAR --
-
-CREATE OR REPLACE VIEW db_clti.vw_permissoes_admin
-		AS SELECT adm.idtb_permissoes_admin,
-			adm.idtb_om_apoiadas,
-			om.sigla,
-			adm.idtb_estacoes,
-			et.nome,
-			adm.autorizacao
-		FROM db_clti.tb_permissoes_admin adm,
-			db_clti.tb_estacoes et,
-			db_clti.tb_om_apoiadas om
-		WHERE adm.idtb_estacoes = et.idtb_estacoes AND adm.idtb_om_apoiadas = om.idtb_om_apoiadas;
+GRANT ALL ON TABLE gestaoti.vw_setores TO gestaoti;*/

@@ -77,48 +77,18 @@ $versao = $config->SelectVersao();
                     Quadros de Situação
                   </a>
                 </li>
-                <!-- Relatórios a configurar
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=relservico\">
-                    <span data-feather=\"check-square\"></span>
-                    Rel. Serviço
-                  </a>
-                </li>
-                -->
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/monitoramento/?cmd=monitoramento\">
-                    <span data-feather=\"grid\"></span>
-                    Monitoramento
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/apoiados\">
+                  <a class=\"nav-link\" href=\"$url/apoiados/?cmd=apoiados\">
                     <span data-feather=\"anchor\"></span>
                     Órgãos Apoiados
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=pessoalti\">
+                  <a class=\"nav-link\" href=\"$url/apoiados/?cmd=pessoalti\">
                     <span data-feather=\"users\"></span>
                     Pessoal TI
                   </a>
                 </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=qualificacao\">
-                    <span data-feather=\"book-open\"></span>
-                    Qualificação
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=funcoesti\">
-                    <span data-feather=\"crosshair\"></span>
-                    Funções de TI
-                  </a>
-                </li>
-                <!--<h6 class=\"sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted\">
-                  <span>Ativos de TI</span>
-                  <span data-feather=\"plus-circle\"></span>
-                </h6>-->
                 <li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/ativosti/?cmd=sistoperacionais\">
                     <span data-feather=\"globe\"></span>
@@ -137,143 +107,42 @@ $versao = $config->SelectVersao();
                     Memórias
                   </a>
                 </li>
-              </ul>";
-              }
-              else{
-                echo"
                 <h6 class=\"sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted\">
-                    <span>Dados da OM</span>
-                    <span data-feather=\"plus-circle\"></span>
-                  </h6>
+                  <span>Ativos de TI</span>
+                  <span data-feather=\"plus-circle\"></span>
+                </h6>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=setores\">
-                    <span data-feather=\"layout\"></span>
-                    Setores da OM
+                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=estacoes\">
+                    <span data-feather=\"monitor\"></span>
+                    Estações de Trabalho
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=padsictic\">
-                    <span data-feather=\"file-text\"></span>
-                    PAD SIC/TIC
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=quadros\">
-                    <span data-feather=\"file-text\"></span>
-                    Quadros de Situação
-                  </a>
-                </li>
-                <!--<li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=vat\">
-                    <span data-feather=\"folder\"></span>
-                    Visitas de Apoio Técnico
-                  </a>-->
-                </li>
-                <h6 class=\"sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted\">
-                    <span>Equipamentos de TI</span>
-                    <span data-feather=\"plus-circle\"></span>
-                  </h6>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=servidores\">
+                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=servidores\">
                     <span data-feather=\"server\"></span>
                     Servidores
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=estacoes\">
-                    <span data-feather=\"monitor\"></span>
-                    Estações de Trabalho
-                  </a>
-                </li>
-                </li>
-                <!--<li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=manutencaoet\">
-                    <span data-feather=\"alert-triangle\"></span>
-                    Manutenção de ET
-                  </a>
-                </li>-->
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=controleusb\">
-                    <span data-feather=\"clipboard\"></span>
-                    Dispositivos USB
+                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=dvrcameras\">
+                    <span data-feather=\"video\"></span>
+                    DVR e Câmeras
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=administrador\">
-                    <span data-feather=\"alert-triangle\"></span>
-                    Permissões de Administrador
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=naopad\">
-                    <span data-feather=\"alert-circle\"></span>
-                    Softwares não Padronizados
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=conectividade\">
+                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=conectividade\">
                     <span data-feather=\"command\"></span>
                     Equipamentos de Conectividade
                   </a>
                 </li>
-                <!--<li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=mapainfra\">
-                    <span data-feather=\"share-2\"></span>
-                    Mapeamento da Infraestrutura
-                  </a>-->
-                </li>
+              </ul>";
+              }
+              else{
+                echo"
                 <h6 class=\"sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted\">
-                    <span>Pessoal</span>
+                    <span>Ocorreu algum erro, tente novamente!</span>
                     <span data-feather=\"plus-circle\"></span>
                   </h6>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=pessoalti\">
-                    <span data-feather=\"user-plus\"></span>
-                    Pessoal de TI
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=cursosti\">
-                    <span data-feather=\"book-open\"></span>
-                    Qualificação na Área de TI
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=pessoalom\">
-                    <span data-feather=\"users\"></span>
-                    Usuários da OM
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=tri_tret\">
-                    <span data-feather=\"users\"></span>
-                    TRI/TRET
-                  </a>
-                </li>
-                <!--<li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=perfisinternet\">
-                    <span data-feather=\"youtube\"></span>
-                    Perfis de Internet
-                  </a>
-                </li>-->
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/omapoiada/?cmd=funcsigdem\">
-                    <span data-feather=\"archive\"></span>
-                    Funções do SiGDEM
-                  </a>
-                </li>
-                <!--<li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"#\">
-                    <span data-feather=\"bar-chart-2\"></span>
-                    Relatórios
-                  </a>
-                </li>
-                <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"#\">
-                    <span data-feather=\"layers\"></span>
-                    Integração
-                  </a>
-                </li>-->
               </ul>";
               }
               ?>

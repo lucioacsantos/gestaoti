@@ -6,13 +6,13 @@
 /* Classe de interação com o PostgreSQL */
 require_once "../class/constantes.inc.php";
 $et = new Estacoes();
-$om = new OMApoiadas();
+$om = new OrgaosApoiados();
 $ip = new IP();
 $sor = new SO();
 $hw = new Hardware();
 
 /* Recupera informações */
-$row = $et->SelectAllTable();
+$row = $et->SelectAllETTable();
 
 @$act = $_GET['act'];
 
@@ -30,11 +30,11 @@ if ($act == 'cad') {
         $estacoes = $et->SelectIdView();
     }
     else{
-        $estacoes = (object)['idtb_estacoes'=>'','idtb_om_apoiadas'=>'','sigla'=>'','fabricante'=>'','modelo'=>'',
+        $estacoes = (object)['idtb_estacoes'=>'','idtb_orgaos_apoiados'=>'','sigla'=>'','fabricante'=>'','modelo'=>'',
             'idtb_proc_modelo'=>'','proc_modelo'=>'','proc_fab'=>'','clock_proc'=>'','idtb_memorias'=>'','tipo_mem'=>'',
             'modelo_mem'=>'','clock_mem'=>'','memoria'=>'','armazenamento'=>'',
             'idtb_sor'=>'','descricao'=>'','versao'=>'','end_ip'=>'','end_mac'=>'','data_aquisicao'=>'NULL',
-            'data_garantia'=>'NULL','localizacao'=>'','req_minimos'=>'','situacao'=>''];
+            'data_garantia'=>'NULL','localizacao'=>'','req_minimos'=>'','status'=>''];
     }
     $om->ordena = "ORDER BY cod_om ASC";
     $omapoiada = $om->SelectAllTable();
@@ -53,7 +53,7 @@ if ($act == 'cad') {
 /* Monta quadro com Estações de Trabalho */
 if (($row) AND ($act == NULL)) {
     
-    $et->ordena = "ORDER BY idtb_om_apoiadas ASC";
+    $et->ordena = "ORDER BY idtb_orgaos_apoiados ASC";
     $estacoes = $et->SelectAllView();
 
     echo"<div class=\"table-responsive\">
@@ -108,7 +108,7 @@ if ($act == 'insert') {
         
         $idtb_estacoes = $_POST['idtb_estacoes'];
         $et->idtb_estacoes = $_POST['idtb_estacoes'];
-        $et->idtb_om_apoiadas = $_POST['idtb_om_apoiadas'];
+        $et->idtb_orgaos_apoiados = $_POST['idtb_orgaos_apoiados'];
         $et->fabricante = strtoupper($_POST['fabricante']);
         $et->modelo = strtoupper($_POST['modelo']);
         $et->idtb_proc_modelo = $_POST['idtb_proc_modelo'];

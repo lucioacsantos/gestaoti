@@ -1,4 +1,4 @@
-/*-- gestaoti.vw_conectividade source
+-- gestaoti.vw_conectividade source
 
 
 CREATE OR REPLACE VIEW gestaoti.vw_conectividade
@@ -75,7 +75,7 @@ ALTER TABLE gestaoti.vw_estacoes OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_estacoes TO gestaoti;
 
 
--- gestaoti.vw_mapainfra source
+/*-- gestaoti.vw_mapainfra source
 
 CREATE OR REPLACE VIEW gestaoti.vw_mapainfra
 AS SELECT mapa.idtb_mapainfra,
@@ -98,42 +98,7 @@ AS SELECT mapa.idtb_mapainfra,
 -- Permissions
 
 ALTER TABLE gestaoti.vw_mapainfra OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_mapainfra TO gestaoti;
-
-
--- gestaoti.vw_pessoal_om source
-
-CREATE OR REPLACE VIEW db_clti.vw_pessoal_om
-	AS SELECT pesom.idtb_pessoal_om,
-		pesom.idtb_posto_grad,
-		posto.sigla AS posto_grad,
-		pesom.idtb_corpo_quadro,
-		corpo.sigla AS corpo_quadro,
-		corpo.exibir AS exibir_corpo_quadro,
-		pesom.idtb_especialidade,
-		espec.sigla AS espec,
-		espec.exibir AS exibir_espec,
-		pesom.idtb_om_apoiadas,
-		om.sigla AS sigla_om,
-		pesom.nip,
-		pesom.cpf,
-		pesom.nome,
-		pesom.nome_guerra,
-		pesom.correio_eletronico,
-		pesom.foradaareati,
-		pesom.status
-	   FROM db_clti.tb_pessoal_om pesom,
-		db_clti.tb_posto_grad posto,
-		db_clti.tb_corpo_quadro corpo,
-		db_clti.tb_especialidade espec,
-		db_clti.tb_om_apoiadas om
-	  WHERE pesom.idtb_posto_grad = posto.idtb_posto_grad AND pesom.idtb_corpo_quadro = corpo.idtb_corpo_quadro 
-		  AND pesom.idtb_especialidade = espec.idtb_especialidade AND pesom.idtb_om_apoiadas = om.idtb_om_apoiadas;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_pessoal_om OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_pessoal_om TO gestaoti;*/
+GRANT ALL ON TABLE gestaoti.vw_mapainfra TO gestaoti;*/
 
 
 -- gestaoti.vw_pessoal_ti source
@@ -161,7 +126,7 @@ ALTER TABLE gestaoti.vw_pessoal_ti OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_pessoal_ti TO gestaoti;
 
 
-/*-- gestaoti.vw_processadores source
+-- gestaoti.vw_processadores source
 
 CREATE OR REPLACE VIEW gestaoti.vw_processadores
 AS SELECT fab.idtb_proc_fab,
@@ -231,8 +196,7 @@ AS SELECT setores.idtb_setores_orgaos,
     setores.sigla_setor,
     setores.cod_funcional,
     setores.compartimento,
-    om.sigla AS sigla_om,
-    om.indicativo AS indicativo_om
+    om.sigla AS sigla_om
    FROM gestaoti.tb_setores_orgaos setores,
     gestaoti.tb_orgaos_apoiados om
   WHERE setores.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
@@ -240,4 +204,4 @@ AS SELECT setores.idtb_setores_orgaos,
 -- Permissions
 
 ALTER TABLE gestaoti.vw_setores OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_setores TO gestaoti;*/
+GRANT ALL ON TABLE gestaoti.vw_setores TO gestaoti;

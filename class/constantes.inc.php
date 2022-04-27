@@ -1097,6 +1097,8 @@ class IP
         $row = $pg->getRows("SELECT * FROM gestaoti.tb_conectividade WHERE end_ip = '$this->end_ip'");
         $row = $pg->getRows("SELECT * FROM gestaoti.tb_estacoes WHERE end_ip = '$this->end_ip'");
         $row = $pg->getRows("SELECT * FROM gestaoti.tb_servidores WHERE end_ip = '$this->end_ip'");
+        $row = $pg->getRows("SELECT * FROM gestaoti.tb_cameras_ip WHERE end_ip = '$this->end_ip'");
+        $row = $pg->getRows("SELECT * FROM gestaoti.tb_dvr WHERE end_ip = '$this->end_ip'");
         return $row;
     }
 }

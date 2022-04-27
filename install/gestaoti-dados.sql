@@ -6856,8 +6856,8 @@ INSERT INTO gestaoti.tb_sor (desenvolvedor,descricao,versao,situacao) VALUES
 ,('VMWARE','VMWARE ESXI','7.0','ATIVO')
 ,('ORACLE','ORACLE LINUX','7','ATIVO')
 ;
-INSERT INTO gestaoti.tb_orgaos_apoiados (cnpj,nome,sigla,idtb_estado,idtb_cidade) VALUES 
-('00000000000000','ÓRGÃO GESTOR DE TI','GES.TI',20,3770);
+INSERT INTO gestaoti.tb_orgaos_apoiados (cnpj,nome,sigla,idtb_estado,idtb_cidade,status) VALUES 
+('00000000000000','ÓRGÃO GESTOR DE TI','GES.TI',20,3770,'ATIVO');
 INSERT INTO gestaoti.tb_pessoal_ti (idtb_orgaos_apoiados,cpf,nome,nome_guerra,correio_eletronico,status,senha,idtb_funcoes_ti) VALUES 
 (1,'12345678','ADMIN','ADMIN','admin@ajsantos.com.br','ATIVO','1f82ea75c5cc526729e2d581aeb3aeccfef4407e256127614ef298fedf9376775a7d7328090f63bf',1);
 INSERT INTO gestaoti.tb_dias_troca (idtb_pessoal_ti,dias_troca) VALUES (1,5);

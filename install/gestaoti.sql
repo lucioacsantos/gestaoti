@@ -243,6 +243,7 @@ CREATE TABLE gestaoti.tb_orgaos_apoiados (
 	sigla varchar(45) NOT NULL,
 	idtb_estado int4 NOT NULL,
 	idtb_cidade int4 NOT NULL,
+	status varchar(45) NOT NULL,
 	CONSTRAINT tb_orgaos_apoiados_cnpj_nome_sigla_key UNIQUE (cnpj, nome, sigla),
 	CONSTRAINT tb_orgaos_apoiados_pkey PRIMARY KEY (idtb_orgaos_apoiados),
 	CONSTRAINT tb_orgaos_apoiados_id_cidade_fkey FOREIGN KEY (idtb_cidade) REFERENCES gestaoti.tb_cidade(id),
@@ -269,6 +270,7 @@ CREATE TABLE gestaoti.tb_setores_orgaos (
 	sigla_setor varchar(255) NOT NULL,
 	cod_funcional varchar(255) NULL,
 	compartimento varchar(255) NULL,
+	status varchar(45) NULL,
 	CONSTRAINT tb_setores_orgaos_pk PRIMARY KEY (idtb_setores_orgaos),
 	CONSTRAINT tb_setores_orgaos_fk FOREIGN KEY (idtb_orgaos_apoiados) 
 		REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)
@@ -296,7 +298,7 @@ CREATE TABLE gestaoti.tb_pessoal_orgaos (
 	nome varchar(255) NOT NULL,
 	nome_guerra varchar(255) NOT NULL,
 	correio_eletronico varchar(255) NOT NULL,
-	status varchar(255) NOT NULL,
+	status varchar(45) NOT NULL,
 	CONSTRAINT tb_pessoal_orgaos_pkey PRIMARY KEY (idtb_pessoal_orgaos),
 	CONSTRAINT tb_pessoal_orgaos_idtb_orgaos_apoiados_fkey FOREIGN KEY (idtb_orgaos_apoiados) 
 		REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)
@@ -322,9 +324,9 @@ CREATE TABLE gestaoti.tb_pessoal_ti (
 	nome varchar(255) NOT NULL,
 	nome_guerra varchar(255) NOT NULL,
 	correio_eletronico varchar(255) NOT NULL,
-	status varchar(255) NOT NULL,
 	senha varchar(255) NOT NULL,
 	idtb_funcoes_ti int4 NOT NULL,
+	status varchar(45) NULL,
 	CONSTRAINT tb_pessoal_ti_pkey PRIMARY KEY (idtb_pessoal_ti),
 	CONSTRAINT tb_pessoal_ti_idtb_funcoes_ti_fkey FOREIGN KEY (idtb_funcoes_ti) 
 		REFERENCES gestaoti.tb_funcoes_ti(idtb_funcoes_ti),
@@ -361,9 +363,9 @@ CREATE TABLE gestaoti.tb_servidores (
 	finalidade varchar(255) NOT NULL,
 	data_aquisicao date NULL,
 	data_garantia date NULL,
-	status varchar(255) NOT NULL,
 	idtb_setores_orgaos int4 NULL,
 	nome varchar(50) NULL,
+	status varchar(45) NULL,
 	CONSTRAINT tb_servidores_pkey PRIMARY KEY (idtb_servidores),
 	CONSTRAINT tb_servidores_un UNIQUE (nome),
 	CONSTRAINT tb_servidores_fk FOREIGN KEY (idtb_setores_orgaos) 
@@ -399,6 +401,7 @@ CREATE TABLE gestaoti.tb_conectividade (
 	idtb_setores_orgaos int4 NULL,
 	qtde_portas int4 NULL, -- Quantidade de portas do ativo de rede
 	nome varchar(50) NULL,
+	status varchar(45) NULL,
 	CONSTRAINT tb_conectividade_end_ip_key UNIQUE (end_ip),
 	CONSTRAINT tb_conectividade_pkey PRIMARY KEY (idtb_conectividade),
 	CONSTRAINT tb_conectividade_un UNIQUE (nome),
@@ -439,11 +442,10 @@ CREATE TABLE gestaoti.tb_estacoes (
 	end_mac varchar(255) NULL,
 	data_aquisicao date NULL,
 	data_garantia date NULL,
-	req_minimos varchar(45) NOT NULL,
-	status varchar(255) NOT NULL,
 	idtb_memorias int4 NULL,
 	idtb_setores_orgaos int4 NOT NULL DEFAULT 1,
 	nome varchar(50) NULL,
+	status varchar(45) NULL,
 	CONSTRAINT tb_estacoes_pkey PRIMARY KEY (idtb_estacoes),
 	CONSTRAINT tb_estacoes_un UNIQUE (nome),
 	CONSTRAINT tb_estacoes_fk FOREIGN KEY (idtb_memorias) REFERENCES gestaoti.tb_memorias(idtb_memorias),
@@ -610,6 +612,7 @@ CREATE TABLE gestaoti.tb_dvr (
 		modelo varchar (255) NOT NULL,
 		end_ip varchar (15) NOT NULL,
 		qtde_cameras int4 NOT NULL,
+		status varchar(45) NULL,
 		CONSTRAINT tb_dvr_pkey PRIMARY KEY (idtb_dvr),
 		CONSTRAINT tb_dvr_fk_1 FOREIGN KEY (idtb_orgaos_apoiados) 
 			REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)
@@ -634,6 +637,7 @@ CREATE TABLE gestaoti.tb_cameras (
 		marca varchar (255) NOT NULL,
 		modelo varchar (255) NOT NULL,
 		localizacao varchar (255) NOT NULL,
+		status varchar(45) NULL,
 		CONSTRAINT tb_cameras_pkey PRIMARY KEY (idtb_cameras),
 		CONSTRAINT tb_cameras_fk_1 FOREIGN KEY (idtb_dvr) 
 			REFERENCES gestaoti.tb_dvr(idtb_dvr)
@@ -659,6 +663,7 @@ CREATE TABLE gestaoti.tb_cameras_ip (
 		modelo varchar (255) NOT NULL,
 		end_ip varchar (15) NOT NULL,
 		localizacao varchar (255) NOT NULL,
+		status varchar(45) NULL,
 		CONSTRAINT tb_cameras_ip_pkey PRIMARY KEY (idtb_cameras_ip),
 		CONSTRAINT tb_cameras_ip_fk_1 FOREIGN KEY (idtb_orgaos_apoiados) 
 			REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)

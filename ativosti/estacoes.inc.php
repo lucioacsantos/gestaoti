@@ -12,7 +12,7 @@ $sor = new SO();
 $hw = new Hardware();
 
 /* Recupera informações */
-$row = $et->SelectAllETTable();
+$row = $et->SelectAll();
 
 @$act = $_GET['act'];
 
@@ -27,17 +27,16 @@ if ($act == 'cad') {
     @$param = $_GET['param'];
     if ($param){
         $et->idtb_estacoes = $param;
-        $estacoes = $et->SelectIdView();
+        $estacoes = $et->SelectId();
     }
     else{
         $estacoes = (object)['idtb_estacoes'=>'','idtb_orgaos_apoiados'=>'','sigla'=>'','fabricante'=>'','modelo'=>'',
             'idtb_proc_modelo'=>'','proc_modelo'=>'','proc_fab'=>'','clock_proc'=>'','idtb_memorias'=>'','tipo_mem'=>'',
-            'modelo_mem'=>'','clock_mem'=>'','memoria'=>'','armazenamento'=>'',
-            'idtb_sor'=>'','descricao'=>'','versao'=>'','end_ip'=>'','end_mac'=>'','data_aquisicao'=>'NULL',
-            'data_garantia'=>'NULL','localizacao'=>'','req_minimos'=>'','status'=>''];
+            'modelo_mem'=>'','clock_mem'=>'','memoria'=>'','armazenamento'=>'','idtb_sor'=>'','descricao'=>'','versao'=>'',
+            'end_ip'=>'','end_mac'=>'','data_aquisicao'=>'NULL','data_garantia'=>'NULL','localizacao'=>'','status'=>''];
     }
-    $om->ordena = "ORDER BY cod_om ASC";
-    $omapoiada = $om->SelectAllTable();
+    $om->ordena = "ORDER BY nome ASC";
+    $omapoiada = $om->SelectApoiados();
     $sor->ordena = "ORDER BY desenvolvedor,versao ASC";
     $so = $sor->SelectSOAtivo();
     $hw->ordena = "ORDER BY fabricante ASC";
@@ -45,7 +44,7 @@ if ($act == 'cad') {
     $hw->ordena = "ORDER BY tipo DESC";
     $mem = $hw->SelectAllMem();
     $om->ordena = "ORDER BY nome_setor ASC";
-    $local = $om->SelectAllSetoresView();
+    $local = $om->SelectSetores();
     
     include "estacoes-formcad.inc.php";
 }
@@ -54,7 +53,7 @@ if ($act == 'cad') {
 if (($row) AND ($act == NULL)) {
     
     $et->ordena = "ORDER BY idtb_orgaos_apoiados ASC";
-    $estacoes = $et->SelectAllView();
+    $estacoes = $et->SelectAll();
 
     echo"<div class=\"table-responsive\">
             <table class=\"table table-hover\">
@@ -65,7 +64,6 @@ if (($row) AND ($act == NULL)) {
                         <th scope=\"col\">Hardware</th>
                         <th scope=\"col\">Sistema Operacional</th>
                         <th scope=\"col\">Endereço IP/MAC</th>
-                        <th scope=\"col\">Req. Mínimos</th>
                         <th scope=\"col\">Situação</th>
                         <th scope=\"col\">Ações</th>
                     </tr>
@@ -81,7 +79,6 @@ if (($row) AND ($act == NULL)) {
                             ".$value->armazenamento." GB/HD</td>
                         <td>".$value->descricao." - ".$value->versao."</td>
                         <td>".$value->end_ip." / ".$value->end_mac."</td>
-                        <td>".$value->req_minimos."</td>
                         <td>";
                         if ($value->status == "EM PRODUÇÃO"){
                             echo "<span data-feather=\"check-circle\"></span></td>";
@@ -122,13 +119,12 @@ if ($act == 'insert') {
         $et->localizacao = strtoupper($_POST['localizacao']);
         $et->data_aquisicao = $_POST['data_aquisicao'];
         $et->data_garantia = $_POST['data_garantia'];
-        $et->req_minimos = $_POST['req_minimos'];
         $et->status = $_POST['status'];
 
         /* Opta pelo Método Update */
         if ($idtb_estacoes){
 
-            $row = $et->UpdateTable();
+            $row = $et->Update();
         
             foreach ($row as $key => $value) {
                 if ($value != '0') {
@@ -156,7 +152,7 @@ if ($act == 'insert') {
 
             else{
 
-                $row = $et->InsertTable();
+                $row = $et->Insert();
             
                 foreach ($row as $key => $value) {
                     if ($value != '0') {

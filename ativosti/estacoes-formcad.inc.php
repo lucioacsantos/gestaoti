@@ -14,12 +14,12 @@
                         <legend>Estações de Trabalho - Cadastro</legend>
 
                         <div class=\"form-group\">
-                            <label for=\"idtb_om_apoiadas\">OM Apoiada:</label>
-                            <select id=\"idtb_om_apoiadas\" class=\"form-control\" name=\"idtb_om_apoiadas\">
-                                <option value=\"$estacoes->idtb_om_apoiadas\" selected=\"true\">
+                            <label for=\"idtb_orgaos_apoiados\">OM Apoiada:</label>
+                            <select id=\"idtb_orgaos_apoiados\" class=\"form-control\" name=\"idtb_orgaos_apoiados\">
+                                <option value=\"$estacoes->idtb_orgaos_apoiados\" selected=\"true\">
                                     ".$estacoes->sigla."</option>";
                                 foreach ($omapoiada as $key => $value) {
-                                    echo"<option value=\"".$value->idtb_om_apoiadas."\">
+                                    echo"<option value=\"".$value->idtb_orgaos_apoiados."\">
                                         ".$value->sigla."</option>";
                                 };
                             echo "</select>
@@ -133,16 +133,6 @@
                             <label for=\"data_garantia\">Final da Garantia/Suporte:</label>
                             <input id=\"data_garantia\" class=\"form-control\" type=\"date\" name=\"data_garantia\" autocomplete=\"off\"
                                 style=\"text-transform:uppercase\" value=\"$estacoes->data_garantia\" required=\"true\">
-                        </div>
-
-                        <div class=\"form-group\">
-                            <label for=\"req_minimos\">Confomidade com Requisitos Mínimos:</label>
-                            <select id=\"req_minimos\" class=\"form-control\" name=\"req_minimos\">
-                                <option value=\"$estacoes->req_minimos\" selected=\"true\">
-                                    $estacoes->req_minimos</option>
-                                <option value=\"SIM\">SIM</option>
-                                <option value=\"NÃO\">NÃO</option>
-                            </select>
                         </div>";
                         if ($param){
                             echo"

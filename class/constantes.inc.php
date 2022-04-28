@@ -195,7 +195,7 @@ class OrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRow("SELECT * FROM gestaoti.vw_setores WHERE idtb_om_setores=$this->idtb_om_setores");
+        $row = $pg->getRow("SELECT * FROM gestaoti.vw_setores WHERE idtb_setores_orgaos=$this->idtb_setores_orgaos");
         return $row;
     }
     public function InsertSetores()
@@ -214,7 +214,7 @@ class OrgaosApoiados
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_om_setores SET (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,compartimento) 
             = ('$this->idtb_orgaos_apoiados','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
-            '$this->compart') WHERE idtb_om_setores='$this->idtb_om_setores'";
+            '$this->compart') WHERE idtb_setores_orgaos='$this->idtb_setores_orgaos'";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -610,7 +610,7 @@ class Conectividade
     public $nome;
     public $qtde_portas;
     public $end_ip;
-    public $idtb_om_setores;
+    public $idtb_setores_orgaos;
     public $data_aquisicao;
     public $data_garantia;
     public $status;
@@ -627,8 +627,8 @@ class Conectividade
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_conectividade SET (idtb_orgaos_apoiados, fabricante, modelo, nome, qtde_portas, end_ip, 
-            idtb_om_setores, data_aquisicao, data_garantia, status) = ('$this->idtb_orgaos_apoiados', '$this->fabricante', 
-            '$this->modelo', '$this->nome', '$this->qtde_portas', '$this->end_ip', '$this->idtb_om_setores', 
+            idtb_setores_orgaos, data_aquisicao, data_garantia, status) = ('$this->idtb_orgaos_apoiados', '$this->fabricante', 
+            '$this->modelo', '$this->nome', '$this->qtde_portas', '$this->end_ip', '$this->idtb_setores_orgaos', 
             '$this->data_aquisicao', '$this->data_garantia', '$this->status') 
             WHERE idtb_conectividade='$this->idtb_conectividade'";
         $row = $pg->exec($sql);
@@ -639,8 +639,8 @@ class Conectividade
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_conectividade(idtb_orgaos_apoiados, fabricante, modelo, nome, qtde_portas, end_ip, 
-            idtb_om_setores, data_aquisicao, data_garantia, status) VALUES ('$this->idtb_orgaos_apoiados', '$this->fabricante', 
-            '$this->modelo', '$this->nome', '$this->qtde_portas', '$this->end_ip', '$this->idtb_om_setores', 
+            idtb_setores_orgaos, data_aquisicao, data_garantia, status) VALUES ('$this->idtb_orgaos_apoiados', '$this->fabricante', 
+            '$this->modelo', '$this->nome', '$this->qtde_portas', '$this->end_ip', '$this->idtb_setores_orgaos', 
             '$this->data_aquisicao', '$this->data_garantia', '$this->status')";
         $row = $pg->exec($sql);
         return $row;
@@ -841,7 +841,7 @@ class Estacoes
     public $modelo;
     public $nome;
     public $end_ip;
-    public $idtb_om_setores;
+    public $idtb_setores_orgaos;
     public $data_aquisicao;
     public $data_garantia;
     public $idtb_proc_modelo;
@@ -851,7 +851,6 @@ class Estacoes
     public $armazenamento;
     public $end_mac;
     public $idtb_sor;
-    public $req_minimos;
     public $idtb_manutencao_et;
     public $data_entrada;
     public $data_saida;
@@ -860,58 +859,49 @@ class Estacoes
     public $situacao;
     public $status;
 
-    public function SelectAllETTable()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.tb_estacoes");
-        return $row;
-    }
-    public function UpdateET()
+    public function Update()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_estacoes SET
-            (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_om_setores, data_aquisicao, data_garantia,
-            idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor,
-            req_minimos, status) = 
+            (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_setores_orgaos, data_aquisicao, data_garantia,
+            idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor, status) = 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
-            '$this->idtb_om_setores', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
+            '$this->idtb_setores_orgaos', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
             '$this->clock_proc', '$this->idtb_memorias', '$this->memoria', '$this->armazenamento', '$this->end_mac', 
-            '$this->idtb_sor','$this->req_minimos', '$this->status') WHERE idtb_estacoes='$this->idtb_estacoes'";
+            '$this->idtb_sor', '$this->status') WHERE idtb_estacoes='$this->idtb_estacoes'";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function InsertET()
+    public function Insert()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_estacoes
-            (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_om_setores, data_aquisicao, data_garantia,
-            idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor,
-            req_minimos, status) VALUES 
+            (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_setores_orgaos, data_aquisicao, data_garantia,
+            idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor, req_minimos, status) VALUES 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
-            '$this->idtb_om_setores', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
+            '$this->idtb_setores_orgaos', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
             '$this->clock_proc', '$this->idtb_memorias', '$this->memoria', '$this->armazenamento', '$this->end_mac', 
-            '$this->idtb_sor', '$this->req_minimos', '$this->status')";
+            '$this->idtb_sor', '$this->status')";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function SelectAllETView()
+    public function SelectAll()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRows("SELECT * FROM gestaoti.vw_estacoes");
         return $row;
     }
-    public function SelectIdETView()
+    public function SelectId()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRow("SELECT * FROM gestaoti.vw_estacoes WHERE idtb_estacoes = $this->idtb_estacoes");
         return $row;
     }
-    public function SelectIdOMETView()
+    public function SelectIdOrgao()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
@@ -966,7 +956,7 @@ class Estacoes
         $row = $pg->exec($sql);
         return $row;
     }
-    public function CountIdOMET()
+    public function CountIdOrgao()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
@@ -999,7 +989,7 @@ class Servidores
     public $end_mac;
     public $finalidade;
     public $idtb_sor;
-    public $idtb_om_setores;
+    public $idtb_setores_orgaos;
     public $status;
 
     public function SelectAllSrvTable()
@@ -1015,12 +1005,12 @@ class Servidores
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_servidores SET 
             (idtb_orgaos_apoiados, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
-            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_om_setores, 
+            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_setores_orgaos, 
             status) = 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
             '$this->clock_proc','$this->qtde_proc', '$this->memoria', '$this->armazenamento','$this->end_ip', 
             '$this->end_mac', '$this->idtb_sor', '$this->finalidade','$this->data_aquisicao', 
-            '$this->data_garantia', '$this->idtb_om_setores', '$this->status')
+            '$this->data_garantia', '$this->idtb_setores_orgaos', '$this->status')
             WHERE idtb_servidores='$this->idtb_servidores'";
         $row = $pg->exec($sql);
         return $row;
@@ -1031,12 +1021,12 @@ class Servidores
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_servidores
             (idtb_orgaos_apoiados, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
-            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_om_setores, 
+            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_setores_orgaos, 
             status) VALUES 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
             '$this->clock_proc','$this->qtde_proc', '$this->memoria', '$this->armazenamento','$this->end_ip', 
             '$this->end_mac', '$this->idtb_sor', '$this->finalidade','$this->data_aquisicao', 
-            '$this->data_garantia', '$this->idtb_om_setores', '$this->status')";
+            '$this->data_garantia', '$this->idtb_setores_orgaos', '$this->status')";
         $row = $pg->exec($sql);
         return $row;
     }

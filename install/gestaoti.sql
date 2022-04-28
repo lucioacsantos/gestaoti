@@ -674,3 +674,49 @@ COMMENT ON TABLE gestaoti.tb_cameras IS 'Tabela contendo câmeras IP';
 
 ALTER TABLE gestaoti.tb_cameras_ip OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.tb_cameras_ip TO gestaoti;
+
+
+-- gestaoti.tb_usuarios_senhas definition
+
+-- Drop table
+
+-- DROP TABLE gestaoti.tb_usuarios_senhas;
+
+CREATE TABLE gestaoti.tb_usuarios_senhas (
+		idtb_usuarios_senhas serial NOT NULL,
+		tipo_ativo varchar (255) NOT NULL,
+		id_ativo int4 NOT NULL,
+		usuario varchar (255) NOT NULL,
+		senha varchar (255) NOT NULL,
+		status varchar (45) NOT NULL,
+		CONSTRAINT tb_usuarios_senhas_pkey PRIMARY KEY (idtb_usuarios_senhas)
+);
+COMMENT ON TABLE gestaoti.tb_usuarios_senhas IS 'Tabela contendo usuários e senhas dos ativos de TI';
+
+-- Permissions
+
+ALTER TABLE gestaoti.tb_usuarios_senhas OWNER TO gestaoti;
+GRANT ALL ON TABLE gestaoti.tb_usuarios_senhas TO gestaoti;
+
+
+-- gestaoti.tb_chaves_cripto definition
+
+-- Drop table
+
+-- DROP TABLE gestaoti.tb_chaves_cripto
+
+CREATE TABLE gestaoti.tb_chaves_cripto (
+		idtb_chaves_cripto serial NOT NULL,
+		idtb_pessoal_ti int4 NOT NULL,
+		senha_cripto varchar (255) NOT NULL,
+		chave_cripto varchar (6) NOT NULL,
+		status varchar (45) NOT NULL,
+		CONSTRAINT tb_chaves_cripto_pkey PRIMARY KEY (idtb_chaves_cripto),
+		CONSTRAINT tb_chaves_cripto_fkey FOREIGN KEY (idtb_pessoal_ti) REFERENCES gestaoti.tb_pessoal_ti(idtb_pessoal_ti)
+);
+COMMENT ON TABLE gestaoti.tb_chaves_cripto IS 'Tabela contendo chaves de criptografia';
+
+-- Permissions
+
+ALTER TABLE gestaoti.tb_chaves_cripto OWNER TO gestaoti;
+GRANT ALL ON TABLE gestaoti.tb_chaves_cripto TO gestaoti;

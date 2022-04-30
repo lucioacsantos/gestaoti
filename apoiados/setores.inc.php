@@ -29,17 +29,12 @@ $om->idtb_orgaos_apoiados = $oa;
 if ($oa) {
     $setores = $om->SelectSetores();
 }
-else {
-    $setores = (object)['idtb_setores_orgaos'=>'','idtb_orgaos_apoiados'=>'','nome_setor'=>'','sigla_setor'=>'',
-        'cod_funcional'=>'','compartimento'=>''];
-}
-
 
 /* Checa se há item cadastrado e Carrega form para cadastro de setores */
 if (($setores == NULL) AND ($act == NULL) OR ($act == 'cad')) {
     $act = 'cad';
 	if ($param){
-        $om->idtb_orgaos_setores = $param;
+        $om->idtb_setores_orgaos = $param;
         $setores = $om->SelectSetoresId();
     }
     else{
@@ -70,7 +65,7 @@ if (($setores) AND ($act == NULL)) {
                         <td>".$value->nome_setor."</td>
                         <td>".$value->sigla_setor."</td>
                         <td>".$value->compartimento."</td>
-                        <td><a href=\"?cmd=setores&act=cad&param=".$value->idtb_setores_orgaos."\">Editar</a> - 
+                        <td><a href=\"?cmd=setores&oa=$oa&act=cad&param=".$value->idtb_setores_orgaos."\">Editar</a> - 
                             Excluir</td>
                     </tr>";
     };
@@ -90,13 +85,14 @@ if ($act == 'insert') {
         $om->cod_funcional = mb_strtoupper($_POST['cod_funcional'],'UTF-8');
         $om->compart = mb_strtoupper($_POST['compart'],'UTF-8');
         $om->idtb_orgaos_apoiados = $_POST['idtb_orgaos_apoiados'];
+        $oa = $om->idtb_orgaos_apoiados;
 
         /* Opta pelo Método Update */
         if ($idtb_setores_orgaos){
             $update = $om->UpdateSetores();
             if ($update) {
                 echo "<h5>Resgistros incluídos no banco de dados.</h5>
-                <meta http-equiv=\"refresh\" content=\"1;url=?cmd=setores\">";
+                <meta http-equiv=\"refresh\" content=\"1;url=?cmd=setores&oa=$oa\">";
             }
             else {
                 echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
@@ -107,7 +103,7 @@ if ($act == 'insert') {
             $insert = $om->InsertSetores();
             if ($insert) {
                 echo "<h5>Resgistros incluídos no banco de dados.</h5>
-                <meta http-equiv=\"refresh\" content=\"1;url=?cmd=setores\">";
+                <meta http-equiv=\"refresh\" content=\"1;url=?cmd=setores&oa=$oa\">";
             }
             else {
                 echo "<h5>Ocorreu algum erro, tente novamente.</h5>";

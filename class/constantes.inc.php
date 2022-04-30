@@ -882,7 +882,7 @@ class Estacoes
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_estacoes
             (idtb_orgaos_apoiados, fabricante, modelo, nome, end_ip, idtb_setores_orgaos, data_aquisicao, data_garantia,
-            idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor, req_minimos, status) VALUES 
+            idtb_proc_modelo, clock_proc, idtb_memorias,memoria, armazenamento, end_mac, idtb_sor, status) VALUES 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->end_ip', 
             '$this->idtb_setores_orgaos', '$this->data_aquisicao', '$this->data_garantia', '$this->idtb_proc_modelo', 
             '$this->clock_proc', '$this->idtb_memorias', '$this->memoria', '$this->armazenamento', '$this->end_mac', 

@@ -51,16 +51,15 @@ if ($act == 'cad') {
             'end_ip'=>'','end_mac'=>'','data_aquisicao'=>'NULL','data_garantia'=>'NULL','localizacao'=>'','status'=>'',
             'nome'=>''];
     }
-    $om->ordena = "ORDER BY nome ASC";
-    $omapoiada = $om->SelectApoiados();
+    $om->idtb_orgaos_apoiados = $oa;
     $sor->ordena = "ORDER BY desenvolvedor,versao ASC";
     $so = $sor->SelectSOAtivo();
     $hw->ordena = "ORDER BY fabricante ASC";
     $proc = $hw->SelectAllProcView();
     $hw->ordena = "ORDER BY tipo DESC";
     $mem = $hw->SelectAllMem();
-    //$om->ordena = "ORDER BY nome_setor ASC";
-    //$local = $om->SelectSetores();
+    $om->ordena = "ORDER BY nome_setor ASC";
+    $local = $om->SelectSetores();
     
     include "estacoes-formcad.inc.php";
 }
@@ -73,7 +72,7 @@ if (($row) AND ($act == NULL)) {
             <table class=\"table table-hover\">
                 <thead>
                     <tr>
-                        <th scope=\"col\">OM Apoiada</th>
+                        <th scope=\"col\">Órgão</th>
                         <th scope=\"col\">Fabricante/Modelo</th>
                         <th scope=\"col\">Hardware</th>
                         <th scope=\"col\">Sistema Operacional</th>
@@ -101,8 +100,9 @@ if (($row) AND ($act == NULL)) {
                         if ($value->status == "SEM ATIVIDADE"){
                             echo "<span data-feather=\"alert-triangle\"></span></td>";
                         }
-                 echo  "<td><a href=\"?cmd=estacoes&act=cad&param=".$value->idtb_estacoes."\">Editar</a> - 
-                        Excluir</td>
+                 echo  "<td><a href=\"?cmd=estacoes&oa=$value->idtb_orgaos_apoiados&act=cad&param=
+                            ".$value->idtb_estacoes."\">Editar</a>
+                        </td>
                     </tr>";
     }
     echo"
@@ -116,9 +116,10 @@ if ($act == 'insert') {
     if (isset($_SESSION['status'])){        
         $idtb_estacoes = $_POST['idtb_estacoes'];
         $et->idtb_estacoes = $_POST['idtb_estacoes'];
-        $et->idtb_orgaos_apoiados = $_POST['idtb_orgaos_apoiados'];
+        $et->idtb_orgaos_apoiados = $oa;
         $et->fabricante = strtoupper($_POST['fabricante']);
         $et->modelo = strtoupper($_POST['modelo']);
+        $et->nome = strtoupper($_POST['nome']);
         $et->idtb_proc_modelo = $_POST['idtb_proc_modelo'];
         $et->clock_proc = $_POST['clock_proc'];
         $et->idtb_memorias = $_POST['idtb_memorias'];
@@ -127,7 +128,7 @@ if ($act == 'insert') {
         $et->end_ip = $_POST['end_ip'];
         $et->end_mac = $_POST['end_mac'];
         $et->idtb_sor = $_POST['idtb_sor'];
-        $et->localizacao = strtoupper($_POST['localizacao']);
+        $et->idtb_setores_orgaos = strtoupper($_POST['idtb_setores_orgaos']);
         $et->data_aquisicao = $_POST['data_aquisicao'];
         $et->data_garantia = $_POST['data_garantia'];
         $et->status = $_POST['status'];
@@ -135,16 +136,13 @@ if ($act == 'insert') {
         /* Opta pelo Método Update */
         if ($idtb_estacoes){
             $row = $et->Update();        
-            foreach ($row as $key => $value) {
-                if ($value != '0') {
-                    echo "<h5>Resgistros incluídos no banco de dados.</h5>
+            if ($row) {
+                echo "<h5>Resgistros incluídos no banco de dados.</h5>
                     <meta http-equiv=\"refresh\" content=\"1;url=?cmd=estacoes\">";
-                }        
-                else {
-                    echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
-                }
-            break;
-            }            
+            }        
+            else {
+                echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
+            }
         }
 
         /* Opta pelo Método Insert */
@@ -157,16 +155,12 @@ if ($act == 'insert') {
             }
             else{
                 $row = $et->Insert();            
-                foreach ($row as $key => $value) {
-                    if ($value != '0') {
-                        echo "<h5>Resgistros incluídos no banco de dados.</h5>
-                        <meta http-equiv=\"refresh\" content=\"1;url=?cmd=estacoes\">";
-                    }            
-                    else {
-                        echo "<h5>Ocorreu algum erro, tente novamente.</h5>
-                        ";
-                    }
-                break;
+                if ($row) {
+                    echo "<h5>Resgistros incluídos no banco de dados.</h5>
+                    <meta http-equiv=\"refresh\" content=\"1;url=?cmd=estacoes\">";
+                }            
+                else {
+                    echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
                 }
             }
         }

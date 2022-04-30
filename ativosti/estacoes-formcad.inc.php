@@ -9,7 +9,7 @@
         <div class=\"row\">
             <main>
                 <div id=\"form-cadastro\">
-                    <form id=\"form\" action=\"?cmd=estacoes&act=insert\" method=\"post\" enctype=\"multipart/form-data\">
+                    <form id=\"form\" action=\"?cmd=estacoes&oa=$oa&act=insert\" method=\"post\" enctype=\"multipart/form-data\">
                     <fieldset>
                         <legend>Estações de Trabalho - Cadastro</legend>
                         <div class=\"form-group\">
@@ -93,11 +93,11 @@
                         </div>
                         <div class=\"form-group\">
                             <label for=\"localizacao\">Localização:</label>
-                            <select id=\"idtb_proc_modelo\" class=\"form-control\" name=\"idtb_proc_modelo\">
-                                <option value=\"$estacoes->idtb_om_setores\" selected=\"true\">
+                            <select id=\"idtb_setores_orgaos\" class=\"form-control\" name=\"idtb_setores_orgaos\">
+                                <option value=\"$estacoes->idtb_setores_orgaos\" selected=\"true\">
                                         ".$estacoes->sigla_setor." - ".$estacoes->compartimento."</option>";
                                     foreach ($local as $key => $value) {
-                                        echo"<option value=\"".$value->idtb_om_setores."\">
+                                        echo"<option value=\"".$value->idtb_setores_orgaos."\">
                                             ".$value->sigla_setor." - ".$value->compartimento."</option>";
                                     };
                             echo "</select>

@@ -9,7 +9,7 @@ echo "
         <div class=\"row\">
             <main>
                 <div id=\"form-cadastro\">
-                    <form id=\"setores\" role=\"form\" action=\"?cmd=setores&act=insert\" 
+                    <form id=\"setores\" role=\"form\" action=\"?cmd=setores&oa=$oa&act=insert\" 
                         method=\"post\" enctype=\"multipart/form-data\">
                         <fieldset>
                             <legend>Setores - Cadastro</legend>

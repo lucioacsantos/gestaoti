@@ -16,8 +16,7 @@ $row = $conect->SelectAllTable();
 
 /* Checa se há item cadastrado */
 if (($row == NULL) AND ($act == NULL)) {
-	echo "<h5>Não há equipamentos de conectividade cadastrados,<br />
-		 clique <a href=\"?cmd=conectividade&act=cad\">aqui</a> para fazê-lo.</h5>";
+	echo "<h5>Não há equipamentos de conectividade cadastrados.</h5>";
 }
 
 /* Carrega form para cadastro com objetos do banco ou vazios */

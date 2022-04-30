@@ -12,33 +12,24 @@
                     <form id=\"form\" action=\"?cmd=estacoes&act=insert\" method=\"post\" enctype=\"multipart/form-data\">
                     <fieldset>
                         <legend>Estações de Trabalho - Cadastro</legend>
-
-                        <div class=\"form-group\">
-                            <label for=\"idtb_orgaos_apoiados\">OM Apoiada:</label>
-                            <select id=\"idtb_orgaos_apoiados\" class=\"form-control\" name=\"idtb_orgaos_apoiados\">
-                                <option value=\"$estacoes->idtb_orgaos_apoiados\" selected=\"true\">
-                                    ".$estacoes->sigla."</option>";
-                                foreach ($omapoiada as $key => $value) {
-                                    echo"<option value=\"".$value->idtb_orgaos_apoiados."\">
-                                        ".$value->sigla."</option>";
-                                };
-                            echo "</select>
-                        </div>
-
                         <div class=\"form-group\">
                             <label for=\"fabricante\">Fabricante:</label>
                             <input id=\"fabricante\" class=\"form-control\" type=\"text\" name=\"fabricante\"
                                   placeholder=\"ex. HP / DELL\" style=\"text-transform:uppercase\" 
                                   value=\"$estacoes->fabricante\" required=\"true\" autocomplete=\"off\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"modelo\">Modelo:</label>
                             <input id=\"modelo\" class=\"form-control\" type=\"text\" name=\"modelo\"
                                   placeholder=\"ex. Ellite 800\" style=\"text-transform:uppercase\" 
                                   value=\"$estacoes->modelo\" required=\"true\" autocomplete=\"off\">
                         </div>
-
+                        <div class=\"form-group\">
+                            <label for=\"nome\">Nome:</label>
+                            <input id=\"nome\" class=\"form-control\" type=\"text\" name=\"nome\"
+                                placeholder=\"ex. Encarregado\" style=\"text-transform:uppercase\" 
+                                value=\"$estacoes->nome\" required=\"true\" autocomplete=\"off\">
+                        </div>
                         <div class=\"form-group\">
                             <label for=\"idtb_proc_modelo\">Processador:</label>
                             <select id=\"idtb_proc_modelo\" class=\"form-control\" name=\"idtb_proc_modelo\">
@@ -50,14 +41,12 @@
                                 };
                             echo "</select>
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"clock_proc\">Clock do Processador:</label>
                             <input id=\"clock_proc\" class=\"form-control\" type=\"number\" name=\"clock_proc\"
                                 min=\"0\" step=\"0.1\" placeholder=\"ex. 3.2 (Em GHZ)\" autocomplete=\"off\"
                                 value=\"$estacoes->clock_proc\" required=\"true\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"idtb_memorias\">Memória (Tipo/Modelo):</label>
                             <select id=\"idtb_memorias\" class=\"form-control\" name=\"idtb_memorias\">
@@ -69,19 +58,16 @@
                                 };
                             echo "</select>
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"memoria\">Memória (Total em GB):</label>
                             <input id=\"memoria\" class=\"form-control\" type=\"number\" name=\"memoria\" autocomplete=\"off\"
                                    placeholder=\"ex. 16\" value=\"$estacoes->memoria\" required=\"true\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"armazenamento\">Armazenamento (HD):</label>
                             <input id=\"armazenamento\" class=\"form-control\" type=\"number\" name=\"armazenamento\" autocomplete=\"off\"
                                    placeholder=\"500 (Total em GB)\" value=\"$estacoes->armazenamento\" required=\"true\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"idtb_sor\">Sistema Operacional:</label>
                             <select id=\"idtb_sor\" class=\"form-control\" name=\"idtb_sor\">
@@ -93,42 +79,34 @@
                                 };
                             echo "</select>
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"end_ip\">Endereço IP:</label>
                             <input id=\"end_ip\" class=\"form-control\" type=\"text\" name=\"end_ip\" autocomplete=\"off\"
                                    placeholder=\"ex. 192.168.1.1\" style=\"text-transform:uppercase\"
                                    value=\"$estacoes->end_ip\" maxlength=\"15\" required=\"true\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"end_mac\">Endereço MAC:</label>
                             <input id=\"end_mac\" class=\"form-control\" type=\"text\" name=\"end_mac\" autocomplete=\"off\"
                                    placeholder=\"ex. FF-FF-FF-FF-FF-FF-FF-FF\" style=\"text-transform:uppercase\"
                                    value=\"$estacoes->end_mac\" maxlength=\"23\" required=\"true\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"localizacao\">Localização:</label>
                             <select id=\"idtb_proc_modelo\" class=\"form-control\" name=\"idtb_proc_modelo\">
-                            <option value=\"$estacoes->localizacao\" selected=\"true\">
-                                    ".$estacoes->proc_fab." - ".$estacoes->proc_modelo."</option>";
-                                foreach ($proc as $key => $value) {
-                                    echo"<option value=\"".$value->idtb_proc_modelo."\">
-                                        ".$value->fabricante." - ".$value->modelo."</option>";
-                                };
+                                <option value=\"$estacoes->idtb_om_setores\" selected=\"true\">
+                                        ".$estacoes->sigla_setor." - ".$estacoes->compartimento."</option>";
+                                    foreach ($local as $key => $value) {
+                                        echo"<option value=\"".$value->idtb_om_setores."\">
+                                            ".$value->sigla_setor." - ".$value->compartimento."</option>";
+                                    };
                             echo "</select>
-                            <input id=\"localizacao\" class=\"form-control\" type=\"text\" name=\"localizacao\"
-                                placeholder=\"ex. Sala de Servidores\" style=\"text-transform:uppercase\"
-                                value=\"$estacoes->localizacao\" required=\"true\" autocomplete=\"off\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"data_aquisicao\">Data de Aquisição:</label>
                             <input id=\"data_aquisicao\" class=\"form-control\" type=\"date\" name=\"data_aquisicao\" autocomplete=\"off\"
                                 style=\"text-transform:uppercase\" value=\"$estacoes->data_aquisicao\" required=\"true\">
                         </div>
-
                         <div class=\"form-group\">
                             <label for=\"data_garantia\">Final da Garantia/Suporte:</label>
                             <input id=\"data_garantia\" class=\"form-control\" type=\"date\" name=\"data_garantia\" autocomplete=\"off\"

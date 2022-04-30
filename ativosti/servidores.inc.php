@@ -18,8 +18,7 @@ $row = $pg->getRow($sql);
 
 /* Checa se o tipo de CLTI está cadastrado */
 if (($row == '0') AND ($act == NULL)) {
-	echo "<h5>Não há servidores cadastrados,<br />
-		 clique <a href=\"?cmd=servidores&act=cad\">aqui</a> para fazê-lo.</h5>";
+	echo "<h5>Não há servidores cadastrados.</h5>";
 }
 
 /* Carrega form para cadastro de Servidores */

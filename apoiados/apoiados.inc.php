@@ -112,8 +112,11 @@ if (($row) AND ($act == NULL)) {
                         <th scope=\"row\">".$apoiados->FormatCNPJ($value->cnpj)."</th>
                         <td>".$value->nome."</td>
                         <td>".$value->sigla."</td>
-                        <td><a href=\"?cmd=apoiados&act=cad&param=".$value->idtb_orgaos_apoiados."\">Editar</a> - 
-                            Excluir</td>
+                        <td>
+                            <a href=\"?cmd=apoiados&act=cad&param=".$value->idtb_orgaos_apoiados."\">Editar</a> - 
+                            <a href=\"?cmd=setores&oa=".$value->idtb_orgaos_apoiados."\">Setores</a> - 
+                            <a href=\"$url/ativosti/?oa=".$value->idtb_orgaos_apoiados."\">Cadastrar Ativos</a>
+                        </td>
                     </tr>";
     };
     echo"

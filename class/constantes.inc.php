@@ -188,7 +188,8 @@ class OrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.vw_setores WHERE idtb_orgaos_apoiados=$this->idtb_orgaos_apoiados $this->ordena");
+        $row = $pg->getRows("SELECT * FROM gestaoti.vw_setores WHERE idtb_orgaos_apoiados=$this->idtb_orgaos_apoiados 
+            $this->ordena");
         return $row;
     }
     public function SelectSetoresId()
@@ -202,9 +203,10 @@ class OrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_om_setores (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,compartimento) 
+        $sql = "INSERT INTO gestaoti.tb_setores_orgaos (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,
+                compartimento) 
             VALUES ('$this->idtb_orgaos_apoiados','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
-            '$this->compart')";
+                '$this->compart')";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -212,9 +214,10 @@ class OrgaosApoiados
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_om_setores SET (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,compartimento) 
+        $sql = "UPDATE gestaoti.tb_setores_orgaos SET (idtb_orgaos_apoiados,nome_setor,sigla_setor,cod_funcional,   
+                compartimento) 
             = ('$this->idtb_orgaos_apoiados','$this->nome_setor','$this->sigla_setor','$this->cod_funcional',
-            '$this->compart') WHERE idtb_setores_orgaos='$this->idtb_setores_orgaos'";
+                '$this->compart') WHERE idtb_setores_orgaos='$this->idtb_setores_orgaos'";
         $row = $pg->exec($sql);
         return $row;
     }

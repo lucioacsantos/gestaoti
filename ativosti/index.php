@@ -128,8 +128,6 @@ switch ($cmd) {
           <div class=\"btn-toolbar mb-2 mb-md-0\">
             <div class=\"btn-group mr-2\">
               <a href=\"?cmd=estacoes\"><button class=\"btn btn-sm btn-outline-secondary\">Estações de Trabalho</button></a>
-              <a href=\"?cmd=estacoes&act=cad&oa=$oa\">
-                <button class=\"btn btn-sm btn-outline-secondary\">Cadastro</button></a>
             </div>
           </div>
         </div>";

@@ -995,52 +995,43 @@ class Servidores
     public $idtb_setores_orgaos;
     public $status;
 
-    public function SelectAllSrvTable()
-    {
-        require_once "pgsql.class.php";
-        $pg = new PgSql();
-        $row = $pg->getRows("SELECT * FROM gestaoti.tb_servidores");
-        return $row;
-    }
-    public function UpdateSrv()
+    public function Update()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "UPDATE gestaoti.tb_servidores SET 
             (idtb_orgaos_apoiados, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
-            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_setores_orgaos, 
-            status) = 
+            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, status) = 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
             '$this->clock_proc','$this->qtde_proc', '$this->memoria', '$this->armazenamento','$this->end_ip', 
             '$this->end_mac', '$this->idtb_sor', '$this->finalidade','$this->data_aquisicao', 
-            '$this->data_garantia', '$this->idtb_setores_orgaos', '$this->status')
+            '$this->data_garantia', '$this->status')
             WHERE idtb_servidores='$this->idtb_servidores'";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function InsertSrv()
+    public function Insert()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $sql = "INSERT INTO gestaoti.tb_servidores
             (idtb_orgaos_apoiados, fabricante, modelo, nome, idtb_proc_modelo, clock_proc, qtde_proc, memoria, 
-            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, idtb_setores_orgaos, 
-            status) VALUES 
+            armazenamento, end_ip, end_mac, idtb_sor, finalidade, data_aquisicao, data_garantia, status) VALUES 
             ('$this->idtb_orgaos_apoiados', '$this->fabricante', '$this->modelo', '$this->nome', '$this->idtb_proc_modelo', 
             '$this->clock_proc','$this->qtde_proc', '$this->memoria', '$this->armazenamento','$this->end_ip', 
             '$this->end_mac', '$this->idtb_sor', '$this->finalidade','$this->data_aquisicao', 
-            '$this->data_garantia', '$this->idtb_setores_orgaos', '$this->status')";
+            '$this->data_garantia','$this->status')";
         $row = $pg->exec($sql);
         return $row;
     }
-    public function SelectAllSrvView()
+    public function SelectAll()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
         $row = $pg->getRows("SELECT * FROM gestaoti.vw_servidores");
         return $row;
     }
-    public function SelectIdSrvView()
+    public function SelectId()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();

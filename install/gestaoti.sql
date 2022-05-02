@@ -363,13 +363,10 @@ CREATE TABLE gestaoti.tb_servidores (
 	finalidade varchar(255) NOT NULL,
 	data_aquisicao date NULL,
 	data_garantia date NULL,
-	idtb_setores_orgaos int4 NULL,
 	nome varchar(50) NULL,
 	status varchar(45) NULL,
 	CONSTRAINT tb_servidores_pkey PRIMARY KEY (idtb_servidores),
 	CONSTRAINT tb_servidores_un UNIQUE (nome),
-	CONSTRAINT tb_servidores_fk FOREIGN KEY (idtb_setores_orgaos) 
-		REFERENCES gestaoti.tb_setores_orgaos(idtb_setores_orgaos),
 	CONSTRAINT tb_servidores_idtb_orgaos_apoiados_fkey FOREIGN KEY (idtb_orgaos_apoiados) 
 		REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados),
 	CONSTRAINT tb_servidores_idtb_proc_modelo_fkey FOREIGN KEY (idtb_proc_modelo) 

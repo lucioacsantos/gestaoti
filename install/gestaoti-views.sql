@@ -161,7 +161,6 @@ AS SELECT srv.idtb_servidores,
     srv.finalidade,
     srv.data_aquisicao,
     srv.data_garantia,
-    srv.idtb_setores_orgaos,
     srv.status,
     om.sigla,
     fab.idtb_proc_fab,
@@ -169,16 +168,13 @@ AS SELECT srv.idtb_servidores,
     modelo.modelo AS proc_modelo,
     sor.descricao,
     sor.versao,
-    sor.situacao,
-    setores.sigla_setor,
-    setores.compartimento
+    sor.situacao
    FROM gestaoti.tb_servidores srv,
     gestaoti.tb_proc_fab fab,
     gestaoti.tb_proc_modelo modelo,
     gestaoti.tb_orgaos_apoiados om,
-    gestaoti.tb_setores_orgaos setores,
     gestaoti.tb_sor sor
-  WHERE srv.idtb_proc_modelo = modelo.idtb_proc_modelo AND srv.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND srv.idtb_sor = sor.idtb_sor AND modelo.idtb_proc_fab = fab.idtb_proc_fab AND srv.idtb_setores_orgaos = setores.idtb_setores_orgaos;
+  WHERE srv.idtb_proc_modelo = modelo.idtb_proc_modelo AND srv.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND srv.idtb_sor = sor.idtb_sor AND modelo.idtb_proc_fab = fab.idtb_proc_fab;
 
 -- Permissions
 

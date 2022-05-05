@@ -20,6 +20,7 @@ $msg = $_SESSION ['msg'];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistema Integrado para Gestão de Sistemas e Serviços de Tecnologia da Informação">
     <meta name="author" content="Lúcio ALEXANDRE Correia dos Santos AJSantos lucio.alexandre@ajsantos.com.br">
+    <meta name="generator" content="LucioACSantos">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -73,13 +74,25 @@ if ($act == NULL){
 
 /* Método Login */
 if ($act == 'login') {
+  
+  include_once("class/queries.inc.php");
+  $acesso = new Principal();
   $usr = new Usuario();
+  
   $usuario = $_POST['usuario'];
   $usr->usuario = $usuario;
-  $hash = sha1(md5($_POST['senha']));
-  $salt = sha1(md5($usuario));
-  $senha = $salt.$hash;
-  $usr->senha = $senha;
+  $acesso->var1 = $_POST['usuario'];
+  $acesso->var2 = $_POST['senha'];
+  $var = $acesso->Executa();
+  if ($var){
+    $usr->senha = $var->var5;
+  }
+  else{
+    $_SESSION ['msg'] = "Ocorreu algum erro!";
+    $msg = $_SESSION ['msg'];
+    include_once("login.inc.php");
+  }
+  
 
   $row = $usr->Login();
     

@@ -83,12 +83,12 @@ $versao = $config->SelectVersao();
                     Órgãos Apoiados
                   </a>
                 </li>
-                <li class=\"nav-item\">
+                <!--<li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/apoiados/?cmd=pessoalti\">
                     <span data-feather=\"users\"></span>
                     Pessoal TI
                   </a>
-                </li>
+                </li>-->
                 <li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/ativosti/?cmd=sistoperacionais\">
                     <span data-feather=\"globe\"></span>

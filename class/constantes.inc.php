@@ -1067,7 +1067,156 @@ class Servidores
 /** Classe DVR Cameras Cameras IP */
 class DVRCameras
 {
+    public $idtb_cameras_ip;
+    public $idtb_cameras;
+    public $idtb_dvr;
+    public $idtb_orgaos_apoiados;
+    public $marca;
+    public $modelo;
+    public $end_ip;
+    public $qtde_cameras;
+    public $localizacao;
+    public $status;
 
+    /** Funções para Câmeras IP */
+    function SelectAllCamIP()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_cameras_ip WHERE status='EM PRODUÇÃO'";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function SelectCamIP()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_cameras_ip WHERE status='EM PRODUÇÃO' AND
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function SelectIdCamIP()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_cameras_ip WHERE idtb_cameras_ip = $this->idtb_cameras_ip";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function InsertCamIP()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "INSERT INTO gestaoti.tb_cameras_ip (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,status) VALUES
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+            '$this->status')";
+        $row = $pg->exec($sql);
+        return $row;
+    }
+    function UpdateCamIP()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "UPDATE gestaoti.tb_cameras_ip SET (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,status) =
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+            '$this->status')
+            WHERE idtb_cameras_ip = $this->idtb_cameras_ip";
+        $row = $pg->exec($sql);
+        return $row;
+    }
+    /** Funções para Câmeras em DVR */
+    function SelectAllCam()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_cameras WHERE status='EM PRODUÇÃO'";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function SelectCam()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_cameras WHERE status='EM PRODUÇÃO' AND
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function SelectIdCam()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_cameras WHERE idtb_cameras = $this->idtb_cameras";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function InsertCam()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "INSERT INTO gestaoti.tb_cameras (idtb_dvr,marca,modelo,localizacao,status) VALUES
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->localizacao','$this->status')";
+        $row = $pg->exec($sql);
+        return $row;
+    }
+    function UpdateCam()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "UPDATE gestaoti.tb_cameras SET (idtb_dvr,marca,modelo,localizacao,status) =
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->localizacao','$this->status')
+            WHERE idtb_cameras = $this->idtb_cameras";
+        $row = $pg->exec($sql);
+        return $row;
+    }
+    /** Funções para DVR */
+    function SelectAllDVR()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_dvr WHERE status='EM PRODUÇÃO'";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function SelectDVR()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_dvr WHERE status='EM PRODUÇÃO' AND
+            idtb_orgaos_apoiados = $this->idtb_orgaos_apoiados";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function SelectIdDVR()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "SELECT * FROM gestaoti.tb_dvr WHERE idtb_dvr = $this->idtb_dvr";
+        $row = $pg->getRows($sql);
+        return $row;
+    }
+    function InsertDVR()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "INSERT INTO gestaoti.tb_dvr (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,qtde_cameras,status) 
+            VALUES ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+            $this->qtde_cameras,'$this->status')";
+        $row = $pg->exec($sql);
+        return $row;
+    }
+    function UpdateDVR()
+    {
+        require_once "pgsql.class.php";
+        $pg = new PgSql();
+        $sql = "UPDATE gestaoti.tb_dvr SET (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,qtde_cameras,status) =
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+            $this->qtde_cameras,'$this->status')
+            WHERE idtb_dvr = $this->idtb_dvr";
+        $row = $pg->exec($sql);
+        return $row;
+    }
 }
 /** Classe Verifica IP */
 class IP

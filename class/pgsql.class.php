@@ -37,7 +37,6 @@ class PgSql
     public function getRows($sql)
     {
         $result = pg_query($this->db, $sql);
-        if (pg_last_error()) exit(pg_last_error());
         $this->num_rows = pg_num_rows($result);
         $rows = array();
         while ($item = pg_fetch_object($result)) {
@@ -51,7 +50,6 @@ class PgSql
     {
         $result = pg_query($this->db, $sql);
         $col = pg_fetch_result($result, 0);
-        if (pg_last_error()) exit(pg_last_error());
         return $col;
     }
     // SELECT
@@ -60,7 +58,6 @@ class PgSql
     {
         $result = pg_query($this->db, $sql);
         $arr = pg_fetch_all_columns($result);
-        if (pg_last_error()) exit(pg_last_error());
         return $arr;
     }
     // INSERT
@@ -69,7 +66,6 @@ class PgSql
     {
         $sql .= ' RETURNING '.$id;
         $result = pg_query($this->db, $sql);
-        if (pg_last_error()) exit(pg_last_error());
         $this->last_id = pg_fetch_result($result, 0);
         return $this->last_id;
     }
@@ -78,7 +74,6 @@ class PgSql
     public function exec($sql)
     {
         $result = pg_query($this->db, $sql);
-        if (pg_last_error()) exit(pg_last_error());
         $this->aff_rows = pg_affected_rows($result);
         return $this->aff_rows;
     }

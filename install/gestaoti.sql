@@ -608,11 +608,14 @@ CREATE TABLE gestaoti.tb_dvr (
 		marca varchar (255) NOT NULL,
 		modelo varchar (255) NOT NULL,
 		end_ip varchar (15) NOT NULL,
+		idtb_setores_orgaos int4 NULL,
 		qtde_cameras int4 NOT NULL,
 		status varchar(45) NULL,
 		CONSTRAINT tb_dvr_pkey PRIMARY KEY (idtb_dvr),
 		CONSTRAINT tb_dvr_fk_1 FOREIGN KEY (idtb_orgaos_apoiados) 
-			REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)
+			REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados),
+		CONSTRAINT tb_dvr_fk_2 FOREIGN KEY (idtb_setores_orgaos) 
+			REFERENCES gestaoti.tb_setores_orgaos(idtb_setores_orgaos)
 );
 COMMENT ON TABLE gestaoti.tb_dvr IS 'Tabela contendo DVR';
 

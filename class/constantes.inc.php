@@ -1075,7 +1075,7 @@ class DVRCameras
     public $modelo;
     public $end_ip;
     public $qtde_cameras;
-    public $localizacao;
+    public $idtb_setores_orgaos;
     public $status;
 
     /** Funções para Câmeras IP */
@@ -1108,8 +1108,8 @@ class DVRCameras
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_cameras_ip (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,status) VALUES
-            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+        $sql = "INSERT INTO gestaoti.tb_cameras_ip (idtb_orgaos_apoiados,marca,modelo,end_ip,idtb_setores_orgaos,status) VALUES
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->idtb_setores_orgaos',
             '$this->status')";
         $row = $pg->exec($sql);
         return $row;
@@ -1118,8 +1118,8 @@ class DVRCameras
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_cameras_ip SET (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,status) =
-            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+        $sql = "UPDATE gestaoti.tb_cameras_ip SET (idtb_orgaos_apoiados,marca,modelo,end_ip,idtb_setores_orgaos,status) =
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->idtb_setores_orgaos',
             '$this->status')
             WHERE idtb_cameras_ip = $this->idtb_cameras_ip";
         $row = $pg->exec($sql);
@@ -1155,8 +1155,8 @@ class DVRCameras
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_cameras (idtb_dvr,marca,modelo,localizacao,status) VALUES
-            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->localizacao','$this->status')";
+        $sql = "INSERT INTO gestaoti.tb_cameras (idtb_dvr,marca,modelo,idtb_setores_orgaos,status) VALUES
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->idtb_setores_orgaos','$this->status')";
         $row = $pg->exec($sql);
         return $row;
     }
@@ -1164,8 +1164,8 @@ class DVRCameras
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_cameras SET (idtb_dvr,marca,modelo,localizacao,status) =
-            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->localizacao','$this->status')
+        $sql = "UPDATE gestaoti.tb_cameras SET (idtb_dvr,marca,modelo,idtb_setores_orgaos,status) =
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->idtb_setores_orgaos','$this->status')
             WHERE idtb_cameras = $this->idtb_cameras";
         $row = $pg->exec($sql);
         return $row;
@@ -1192,16 +1192,16 @@ class DVRCameras
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "SELECT * FROM gestaoti.tb_dvr WHERE idtb_dvr = $this->idtb_dvr";
-        $row = $pg->getRows($sql);
+        $sql = "SELECT * FROM gestaoti.vw_dvr WHERE idtb_dvr = $this->idtb_dvr";
+        $row = $pg->getRow($sql);
         return $row;
     }
     function InsertDVR()
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "INSERT INTO gestaoti.tb_dvr (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,qtde_cameras,status) 
-            VALUES ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+        $sql = "INSERT INTO gestaoti.tb_dvr (idtb_orgaos_apoiados,marca,modelo,end_ip,idtb_setores_orgaos,qtde_cameras,status) 
+            VALUES ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip',$this->idtb_setores_orgaos,
             $this->qtde_cameras,'$this->status')";
         $row = $pg->exec($sql);
         return $row;
@@ -1210,8 +1210,8 @@ class DVRCameras
     {
         require_once "pgsql.class.php";
         $pg = new PgSql();
-        $sql = "UPDATE gestaoti.tb_dvr SET (idtb_orgaos_apoiados,marca,modelo,end_ip,localizacao,qtde_cameras,status) =
-            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip','$this->localizacao',
+        $sql = "UPDATE gestaoti.tb_dvr SET (idtb_orgaos_apoiados,marca,modelo,end_ip,idtb_setores_orgaos,qtde_cameras,status) =
+            ($this->idtb_orgaos_apoiados,'$this->marca','$this->modelo','$this->end_ip',$this->idtb_setores_orgaos,
             $this->qtde_cameras,'$this->status')
             WHERE idtb_dvr = $this->idtb_dvr";
         $row = $pg->exec($sql);

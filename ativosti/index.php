@@ -164,7 +164,7 @@ switch ($cmd) {
           <h1 class=\"h2\">Gerenciamento - DVR</h1>
           <div class=\"btn-toolbar mb-2 mb-md-0\">
             <div class=\"btn-group mr-2\">
-              <a href=\"?cmd=DVR\"><button class=\"btn btn-sm btn-outline-secondary\">DVR</button></a>
+              <a href=\"?cmd=dvr\"><button class=\"btn btn-sm btn-outline-secondary\">DVR</button></a>
             </div>
           </div>
         </div>";
@@ -204,12 +204,14 @@ switch ($cmd) {
                 <button class=\"btn btn-sm btn-outline-secondary\">Estação de Trabalho</button></a>
               <a href=\"?cmd=servidores&act=cad&oa=$oa\">
                 <button class=\"btn btn-sm btn-outline-secondary\">Servidor</button></a>
-              <a href=\"?cmd=cameras&act=cad&param=ip&oa=$oa\">
-                <button class=\"btn btn-sm btn-outline-secondary\">Câmeras IP</button></a>
+              <a href=\"?cmd=conectividade&act=cad&oa=$oa\">
+                <button class=\"btn btn-sm btn-outline-secondary\">Eq.Conectividade</button></a>
+              <!--<a href=\"?cmd=cameras&act=cad&param=ip&oa=$oa\">
+                <button class=\"btn btn-sm btn-outline-secondary\">Câmeras IP</button></a>-->
               <a href=\"?cmd=dvr&act=cad&oa=$oa\">
                 <button class=\"btn btn-sm btn-outline-secondary\">DVR</button></a>
-              <a href=\"?cmd=cameras&act=cad&oa=$oa\">
-                <button class=\"btn btn-sm btn-outline-secondary\">Câmeras em DVR</button></a>
+              <!--<a href=\"?cmd=cameras&act=cad&oa=$oa\">
+                <button class=\"btn btn-sm btn-outline-secondary\">Câmeras em DVR</button></a>-->
             </div>
           </div>
         </div>

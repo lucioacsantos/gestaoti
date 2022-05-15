@@ -83,12 +83,12 @@ $versao = $config->SelectVersao();
                     Órgãos Apoiados
                   </a>
                 </li>
-                <!--<li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/apoiados/?cmd=pessoalti\">
+                <li class=\"nav-item\">
+                  <a class=\"nav-link\" href=\"$url/gerti/?cmd=pesti\">
                     <span data-feather=\"users\"></span>
                     Pessoal TI
                   </a>
-                </li>-->
+                </li>
                 <li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/ativosti/?cmd=sistoperacionais\">
                     <span data-feather=\"globe\"></span>
@@ -124,15 +124,15 @@ $versao = $config->SelectVersao();
                   </a>
                 </li>
                 <li class=\"nav-item\">
-                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=dvrcameras\">
+                  <a class=\"nav-link\" href=\"$url/ativosti/?cmd=dvr\">
                     <span data-feather=\"video\"></span>
-                    DVR e Câmeras
+                    DVR
                   </a>
                 </li>
                 <li class=\"nav-item\">
                   <a class=\"nav-link\" href=\"$url/ativosti/?cmd=conectividade\">
                     <span data-feather=\"command\"></span>
-                    Equipamentos de Conectividade
+                    Conectividade
                   </a>
                 </li>
               </ul>";

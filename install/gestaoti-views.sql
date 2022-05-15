@@ -200,3 +200,28 @@ AS SELECT setores.idtb_setores_orgaos,
 
 ALTER TABLE gestaoti.vw_setores OWNER TO gestaoti;
 GRANT ALL ON TABLE gestaoti.vw_setores TO gestaoti;
+
+-- gestaoti.vw_dvr source
+
+CREATE OR REPLACE VIEW gestaoti.vw_dvr
+AS SELECT dvr.idtb_dvr,
+    setores.idtb_setores_orgaos,
+    om.idtb_orgaos_apoiados,
+    om.sigla,
+    setores.nome_setor,
+    setores.sigla_setor,
+    setores.compartimento,
+    dvr.marca,
+    dvr.modelo,
+    dvr.end_ip,
+    dvr.qtde_cameras,
+    dvr.status
+   FROM gestaoti.tb_setores_orgaos setores,
+    gestaoti.tb_orgaos_apoiados om,
+    gestaoti.tb_dvr dvr
+  WHERE setores.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND dvr.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
+
+-- Permissions
+
+ALTER TABLE gestaoti.vw_dvr OWNER TO gestaoti;
+GRANT ALL ON TABLE gestaoti.vw_dvr TO gestaoti;

@@ -21,12 +21,6 @@ CREATE OR REPLACE VIEW gestaoti.vw_conectividade
 		gestaoti.tb_orgaos_apoiados orgao
 	  WHERE conec.idtb_orgaos_apoiados = orgao.idtb_orgaos_apoiados AND conec.idtb_setores_orgaos = setores.idtb_setores_orgaos;
 
--- Permissions
-
-ALTER TABLE gestaoti.vw_conectividade OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_conectividade TO gestaoti;
-
-
 -- gestaoti.vw_estacoes source
 
 CREATE OR REPLACE VIEW gestaoti.vw_estacoes
@@ -68,13 +62,8 @@ AS SELECT et.idtb_estacoes,
     gestaoti.tb_memorias mem
   WHERE et.idtb_proc_modelo = modelo.idtb_proc_modelo AND et.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND et.idtb_sor = sor.idtb_sor AND modelo.idtb_proc_fab = fab.idtb_proc_fab AND et.idtb_memorias = mem.idtb_memorias AND et.idtb_setores_orgaos = setores.idtb_setores_orgaos;
 
--- Permissions
 
-ALTER TABLE gestaoti.vw_estacoes OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_estacoes TO gestaoti;
-
-
-/*-- gestaoti.vw_mapainfra source
+-- gestaoti.vw_mapainfra source
 
 CREATE OR REPLACE VIEW gestaoti.vw_mapainfra
 AS SELECT mapa.idtb_mapainfra,
@@ -93,11 +82,6 @@ AS SELECT mapa.idtb_mapainfra,
     gestaoti.tb_conectividade conec,
     gestaoti.tb_orgaos_apoiados om
   WHERE mapa.idtb_conectividade_orig = conec.idtb_conectividade AND mapa.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_mapainfra OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_mapainfra TO gestaoti;*/
 
 
 -- gestaoti.vw_pessoal_ti source
@@ -119,12 +103,6 @@ AS SELECT pesti.idtb_pessoal_ti,
     gestaoti.tb_funcoes_ti funcao
   WHERE pesti.idtb_orgaos_apoiados = apoiados.idtb_orgaos_apoiados AND pesti.idtb_funcoes_ti = funcao.idtb_funcoes_ti;
 
--- Permissions
-
-ALTER TABLE gestaoti.vw_pessoal_ti OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_pessoal_ti TO gestaoti;
-
-
 -- gestaoti.vw_processadores source
 
 CREATE OR REPLACE VIEW gestaoti.vw_processadores
@@ -136,10 +114,6 @@ AS SELECT fab.idtb_proc_fab,
     gestaoti.tb_proc_modelo modelo
   WHERE modelo.idtb_proc_fab = fab.idtb_proc_fab;
 
--- Permissions
-
-ALTER TABLE gestaoti.vw_processadores OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_processadores TO gestaoti;
 
 
 -- gestaoti.vw_servidores source
@@ -176,10 +150,6 @@ AS SELECT srv.idtb_servidores,
     gestaoti.tb_sor sor
   WHERE srv.idtb_proc_modelo = modelo.idtb_proc_modelo AND srv.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND srv.idtb_sor = sor.idtb_sor AND modelo.idtb_proc_fab = fab.idtb_proc_fab;
 
--- Permissions
-
-ALTER TABLE gestaoti.vw_servidores OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_servidores TO gestaoti;
 
 
 -- gestaoti.vw_setores source
@@ -196,10 +166,7 @@ AS SELECT setores.idtb_setores_orgaos,
     gestaoti.tb_orgaos_apoiados om
   WHERE setores.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
 
--- Permissions
 
-ALTER TABLE gestaoti.vw_setores OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_setores TO gestaoti;
 
 -- gestaoti.vw_dvr source
 
@@ -220,8 +187,3 @@ AS SELECT dvr.idtb_dvr,
     gestaoti.tb_orgaos_apoiados om,
     gestaoti.tb_dvr dvr
   WHERE setores.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados AND dvr.idtb_orgaos_apoiados = om.idtb_orgaos_apoiados;
-
--- Permissions
-
-ALTER TABLE gestaoti.vw_dvr OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.vw_dvr TO gestaoti;

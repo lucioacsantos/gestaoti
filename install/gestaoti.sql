@@ -1,50 +1,23 @@
--- gestaoti.tb_orgao_gestor definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_orgao_gestor;
-
 CREATE TABLE gestaoti.tb_orgao_gestor (
-	idtb_orgao_gestor serial NOT NULL,
+	idtb_orgao_gestor INT auto_increment NOT NULL,
 	nome varchar(255) NOT NULL,
-	abreviatura varchar(45) NULL,
-	dpto_responsavel varchar (255) NULL,
+	abreviatura varchar(45) NOT NULL,
+	dpto_responsavel varchar(255) NOT NULL,
 	cnpj varchar(14) NULL,
-	CONSTRAINT tb_orgao_gestor_pkey PRIMARY KEY (idtb_orgao_gestor)
-);
-COMMENT ON TABLE gestaoti.tb_orgao_gestor IS 'Tabela contendo Informações do Órgão Gestor de TI.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_orgao_gestor OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_orgao_gestor TO gestaoti;
-
-
--- gestaoti.tb_config definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_config;
+	CONSTRAINT tb_orgao_gestor_PK PRIMARY KEY (idtb_orgao_gestor)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci
+COMMENT='Tabela contendo Informações do Órgão Gestor de TI.';
 
 CREATE TABLE gestaoti.tb_config (
-	idtb_config serial NOT NULL,
+	idtb_config INT auto_increment NOT NULL,
 	parametro varchar(255) NULL,
 	valor varchar(255) NULL,
 	CONSTRAINT tb_config_pkey PRIMARY KEY (idtb_config)
 );
-COMMENT ON TABLE gestaoti.tb_config IS 'Tabela contendo Configurações do Sistema.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_config OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_config TO gestaoti;
-
-
--- gestaoti.tb_funcoes_ti definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_funcoes_ti;
+COMMENT='Tabela contendo Configurações do Sistema.';
 
 CREATE TABLE gestaoti.tb_funcoes_ti (
 	idtb_funcoes_ti serial NOT NULL,
@@ -53,18 +26,6 @@ CREATE TABLE gestaoti.tb_funcoes_ti (
 	CONSTRAINT tb_funcao_ti_pkey PRIMARY KEY (idtb_funcoes_ti)
 );
 COMMENT ON TABLE gestaoti.tb_funcoes_ti IS 'Tabela contendo Funções de TI.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_funcoes_ti OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_funcoes_ti TO gestaoti;
-
-
--- gestaoti.tb_memorias definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_memorias;
 
 CREATE TABLE gestaoti.tb_memorias (
 	idtb_memorias serial NOT NULL,
@@ -75,18 +36,6 @@ CREATE TABLE gestaoti.tb_memorias (
 );
 COMMENT ON TABLE gestaoti.tb_memorias IS 'Tabela contendo Modelos de Memórias RAM.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_memorias OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_memorias TO gestaoti;
-
-
--- gestaoti.tb_pais definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_pais;
-
 CREATE TABLE gestaoti.tb_pais (
 	id serial NOT NULL,
 	nome varchar(60) NOT NULL,
@@ -94,18 +43,6 @@ CREATE TABLE gestaoti.tb_pais (
 	CONSTRAINT pais_pkey PRIMARY KEY (id)
 );
 COMMENT ON TABLE gestaoti.tb_pais IS 'Tabela contendo País.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_pais OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_pais TO gestaoti;
-
-
--- gestaoti.tb_proc_fab definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_proc_fab;
 
 CREATE TABLE gestaoti.tb_proc_fab (
 	idtb_proc_fab serial NOT NULL,
@@ -115,18 +52,6 @@ CREATE TABLE gestaoti.tb_proc_fab (
 );
 COMMENT ON TABLE gestaoti.tb_proc_fab IS 'Tabela contendo Fabricantes de Processadores.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_proc_fab OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_proc_fab TO gestaoti;
-
-
--- gestaoti.tb_registro_log definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_registro_log;
-
 CREATE TABLE gestaoti.tb_registro_log (
 	idtb_registro_log serial NOT NULL,
 	data_acao date NOT NULL,
@@ -135,18 +60,6 @@ CREATE TABLE gestaoti.tb_registro_log (
 	CONSTRAINT tb_registro_log_pkey PRIMARY KEY (idtb_registro_log)
 );
 COMMENT ON TABLE gestaoti.tb_registro_log IS 'Tabela contendo Registros de LOG.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_registro_log OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_registro_log TO gestaoti;
-
-
--- gestaoti.tb_sor definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_sor;
 
 CREATE TABLE gestaoti.tb_sor (
 	idtb_sor serial NOT NULL,
@@ -158,18 +71,6 @@ CREATE TABLE gestaoti.tb_sor (
 );
 COMMENT ON TABLE gestaoti.tb_sor IS 'Tabela contendo Sisteamas Operacionais.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_sor OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_sor TO gestaoti;
-
-
--- gestaoti.tb_estado definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_estado;
-
 CREATE TABLE gestaoti.tb_estado (
 	id serial NOT NULL,
 	nome varchar(75) NOT NULL,
@@ -179,18 +80,6 @@ CREATE TABLE gestaoti.tb_estado (
 	CONSTRAINT tb_estado_pais_fkey FOREIGN KEY (pais) REFERENCES gestaoti.tb_pais(id)
 );
 COMMENT ON TABLE gestaoti.tb_estado IS 'Tabela contendo Estados.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_estado OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_estado TO gestaoti;
-
-
--- gestaoti.tb_proc_modelo definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_proc_modelo;
 
 CREATE TABLE gestaoti.tb_proc_modelo (
 	idtb_proc_modelo serial NOT NULL,
@@ -203,18 +92,6 @@ CREATE TABLE gestaoti.tb_proc_modelo (
 );
 COMMENT ON TABLE gestaoti.tb_proc_modelo IS 'Tabela contendo Modelos de Processadores.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_proc_modelo OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_proc_modelo TO gestaoti;
-
-
--- gestaoti.tb_cidade definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_cidade;
-
 CREATE TABLE gestaoti.tb_cidade (
 	id serial NOT NULL,
 	nome varchar(120) NOT NULL,
@@ -223,18 +100,6 @@ CREATE TABLE gestaoti.tb_cidade (
 	CONSTRAINT tb_cidade_estado_fkey FOREIGN KEY (estado) REFERENCES gestaoti.tb_estado(id)
 );
 COMMENT ON TABLE gestaoti.tb_cidade IS 'Tabela contendo Cidades.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_cidade OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_cidade TO gestaoti;
-
-
--- gestaoti.tb_orgaos_apoiados definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_orgaos_apoiados;
 
 CREATE TABLE gestaoti.tb_orgaos_apoiados (
 	idtb_orgaos_apoiados serial NOT NULL,
@@ -250,18 +115,6 @@ CREATE TABLE gestaoti.tb_orgaos_apoiados (
 	CONSTRAINT tb_orgaos_apoiados_id_estado_fkey FOREIGN KEY (idtb_estado) REFERENCES gestaoti.tb_estado(id)
 );
 COMMENT ON TABLE gestaoti.tb_orgaos_apoiados IS 'Tabela contendo Órgãos Apoiadas pelo Gestor de TI.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_orgaos_apoiados OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_orgaos_apoiados TO gestaoti;
-
-
--- gestaoti.tb_setores_orgaos definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_setores_orgaos;
 
 CREATE TABLE gestaoti.tb_setores_orgaos (
 	idtb_setores_orgaos serial NOT NULL,
@@ -279,18 +132,6 @@ CREATE UNIQUE INDEX tb_setores_orgaos_idtb_setores_orgaos_idx ON gestaoti.tb_set
 	USING btree (idtb_setores_orgaos);
 COMMENT ON TABLE gestaoti.tb_setores_orgaos IS 'Tabela contendo Setores dos Órgãos.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_setores_orgaos OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_setores_orgaos TO gestaoti;
-
-
--- gestaoti.tb_pessoal_orgaos definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_pessoal_orgaos;
-
 CREATE TABLE gestaoti.tb_pessoal_orgaos (
 	idtb_pessoal_orgaos serial NOT NULL,
 	idtb_orgaos_apoiados int4 NOT NULL,
@@ -304,18 +145,6 @@ CREATE TABLE gestaoti.tb_pessoal_orgaos (
 		REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)
 );
 COMMENT ON TABLE gestaoti.tb_pessoal_orgaos IS 'Tabela contendo Pessoal (Usuários) da OM';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_pessoal_orgaos OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_pessoal_orgaos TO gestaoti;
-
-
--- gestaoti.tb_pessoal_ti definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_pessoal_ti;
 
 CREATE TABLE gestaoti.tb_pessoal_ti (
 	idtb_pessoal_ti serial NOT NULL,
@@ -334,18 +163,6 @@ CREATE TABLE gestaoti.tb_pessoal_ti (
 		REFERENCES gestaoti.tb_orgaos_apoiados(idtb_orgaos_apoiados)
 );
 COMMENT ON TABLE gestaoti.tb_pessoal_ti IS 'Tabela contendo Pessoal de TI.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_pessoal_ti OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_pessoal_ti TO gestaoti;
-
-
--- gestaoti.tb_servidores definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_servidores;
 
 CREATE TABLE gestaoti.tb_servidores (
 	idtb_servidores serial NOT NULL,
@@ -375,18 +192,6 @@ CREATE TABLE gestaoti.tb_servidores (
 );
 COMMENT ON TABLE gestaoti.tb_servidores IS 'Tabela contendo Servidores.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_servidores OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_servidores TO gestaoti;
-
-
--- gestaoti.tb_conectividade definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_conectividade;
-
 CREATE TABLE gestaoti.tb_conectividade (
 	idtb_conectividade serial NOT NULL,
 	idtb_orgaos_apoiados int4 NOT NULL,
@@ -409,21 +214,7 @@ CREATE TABLE gestaoti.tb_conectividade (
 );
 COMMENT ON TABLE gestaoti.tb_conectividade IS 'Tabela contendo Equipamentos de Conectividade.';
 
--- Column comments
-
 COMMENT ON COLUMN gestaoti.tb_conectividade.qtde_portas IS 'Quantidade de portas do ativo de rede';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_conectividade OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_conectividade TO gestaoti;
-
-
--- gestaoti.tb_estacoes definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_estacoes;
 
 CREATE TABLE gestaoti.tb_estacoes (
 	idtb_estacoes serial NOT NULL,
@@ -456,18 +247,6 @@ CREATE TABLE gestaoti.tb_estacoes (
 );
 COMMENT ON TABLE gestaoti.tb_estacoes IS 'Tabela contendo Estações de Trabalho.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_estacoes OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_estacoes TO gestaoti;
-
-
--- gestaoti.tb_manutencao_et definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_manutencao_et;
-
 CREATE TABLE gestaoti.tb_manutencao_et (
 	idtb_manutencao_et serial NOT NULL,
 	idtb_estacoes int4 NOT NULL,
@@ -484,18 +263,6 @@ CREATE TABLE gestaoti.tb_manutencao_et (
 );
 CREATE INDEX tb_manutencao_et_idtb_manutencao_et_idx ON gestaoti.tb_manutencao_et USING btree (idtb_manutencao_et);
 COMMENT ON TABLE gestaoti.tb_manutencao_et IS 'Tabela contendo Controle de Manutenção das ET.';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_manutencao_et OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_manutencao_et TO gestaoti;
-
-
--- gestaoti.tb_mapainfra definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_mapainfra;
 
 CREATE TABLE gestaoti.tb_mapainfra (
 	idtb_mapainfra serial NOT NULL,
@@ -520,18 +287,6 @@ CREATE TABLE gestaoti.tb_mapainfra (
 );
 COMMENT ON TABLE gestaoti.tb_mapainfra IS 'Mapeamentos dos pontos de rede da infraestrutura,';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_mapainfra OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_mapainfra TO gestaoti;
-
-
--- gestaoti.tb_nec_aquisicao definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_nec_aquisicao;
-
 CREATE TABLE gestaoti.tb_nec_aquisicao (
 	idtb_nec_aquisicao serial NOT NULL,
 	idtb_manutencao_et int4 NOT NULL,
@@ -548,18 +303,6 @@ CREATE INDEX tb_nec_aquisicao_idtb_nec_aquisicao_idx ON gestaoti.tb_nec_aquisica
 COMMENT ON TABLE gestaoti.tb_nec_aquisicao IS 'Tabela contendo Necessidades de Aquisição de Material de 
 	TI para reparos de ET.';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_nec_aquisicao OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_nec_aquisicao TO gestaoti;
-
-
--- gestaoti.tb_dias_troca definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_dias_troca;
-
 CREATE TABLE gestaoti.tb_dias_troca (
 		idtb_dias_troca serial NOT NULL,
 		idtb_pessoal_ti int4 NOT NULL,
@@ -570,18 +313,6 @@ CREATE TABLE gestaoti.tb_dias_troca (
 	);
 COMMENT ON TABLE gestaoti.tb_dias_troca IS 'Tabela contendo Dias para Troca de Senha';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_dias_troca OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_dias_troca TO gestaoti;
-
-
--- gestaoti.tb_numerador definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_numerador;
-
 CREATE TABLE gestaoti.tb_numerador (
 		idtb_numerador serial NOT NULL,
 		parametro varchar(255) NOT NULL,
@@ -589,18 +320,6 @@ CREATE TABLE gestaoti.tb_numerador (
 		CONSTRAINT tb_numerador_pkey PRIMARY KEY (idtb_numerador)
 	);
 COMMENT ON TABLE gestaoti.tb_numerador IS 'Tabela contendo Números de Documentos';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_numerador OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_numerador TO gestaoti;
-
-
--- gestaoti.tb_dvr definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_dvr;
 
 CREATE TABLE gestaoti.tb_dvr (
 		idtb_dvr serial NOT NULL,
@@ -619,18 +338,6 @@ CREATE TABLE gestaoti.tb_dvr (
 );
 COMMENT ON TABLE gestaoti.tb_dvr IS 'Tabela contendo DVR';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_dvr OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_dvr TO gestaoti;
-
-
--- gestaoti.tb_cameras definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_cameras;
-
 CREATE TABLE gestaoti.tb_cameras (
 		idtb_cameras serial NOT NULL,
 		idtb_dvr int4 NOT NULL,
@@ -643,18 +350,6 @@ CREATE TABLE gestaoti.tb_cameras (
 			REFERENCES gestaoti.tb_dvr(idtb_dvr)
 );
 COMMENT ON TABLE gestaoti.tb_cameras IS 'Tabela contendo câmeras';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_cameras OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_cameras TO gestaoti;
-
-
--- gestaoti.tb_cameras_ip definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_cameras_ip;
 
 CREATE TABLE gestaoti.tb_cameras_ip (
 		idtb_cameras_ip serial NOT NULL,
@@ -670,18 +365,6 @@ CREATE TABLE gestaoti.tb_cameras_ip (
 );
 COMMENT ON TABLE gestaoti.tb_cameras IS 'Tabela contendo câmeras IP';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_cameras_ip OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_cameras_ip TO gestaoti;
-
-
--- gestaoti.tb_usuarios_senhas definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_usuarios_senhas;
-
 CREATE TABLE gestaoti.tb_usuarios_senhas (
 		idtb_usuarios_senhas serial NOT NULL,
 		tipo_ativo varchar (255) NOT NULL,
@@ -693,18 +376,6 @@ CREATE TABLE gestaoti.tb_usuarios_senhas (
 );
 COMMENT ON TABLE gestaoti.tb_usuarios_senhas IS 'Tabela contendo usuários e senhas dos ativos de TI';
 
--- Permissions
-
-ALTER TABLE gestaoti.tb_usuarios_senhas OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_usuarios_senhas TO gestaoti;
-
-
--- gestaoti.tb_chaves_cripto definition
-
--- Drop table
-
--- DROP TABLE gestaoti.tb_chaves_cripto
-
 CREATE TABLE gestaoti.tb_chaves_cripto (
 		idtb_chaves_cripto serial NOT NULL,
 		idtb_pessoal_ti int4 NOT NULL,
@@ -715,8 +386,3 @@ CREATE TABLE gestaoti.tb_chaves_cripto (
 		CONSTRAINT tb_chaves_cripto_fkey FOREIGN KEY (idtb_pessoal_ti) REFERENCES gestaoti.tb_pessoal_ti(idtb_pessoal_ti)
 );
 COMMENT ON TABLE gestaoti.tb_chaves_cripto IS 'Tabela contendo chaves de criptografia';
-
--- Permissions
-
-ALTER TABLE gestaoti.tb_chaves_cripto OWNER TO gestaoti;
-GRANT ALL ON TABLE gestaoti.tb_chaves_cripto TO gestaoti;

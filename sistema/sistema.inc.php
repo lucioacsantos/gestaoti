@@ -1,6 +1,6 @@
 <?php
 /**
-*** 99242991 | Lúcio ALEXANDRE Correia dos Santos
+*** lucioacsantos@gmail.com | Lúcio ALEXANDRE Correia dos Santos
 **/
 
 /* Classe de interação com o PostgreSQL */
@@ -8,10 +8,11 @@ require_once "../class/constantes.inc.php";
 $cfg = new Config();
 
 /* Recupera informações */
+$cmd = $act = NULL;
 $row = $cfg->SelectAll();
 
-$cmd = $_GET['cmd'];
-$act = $_GET['act'];
+/*$cmd = $_GET['cmd'];
+$act = $_GET['act'];*/
 
 if ($row) {
     $config = $cfg->SelectAll();

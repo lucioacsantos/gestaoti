@@ -1,6 +1,6 @@
 <?php
 /**
-*** 99242991 | Lúcio ALEXANDRE Correia dos Santos
+*** lucioacsantos@gmail.com | Lúcio ALEXANDRE Correia dos Santos
 **/
 
 /* ClasSe de interação com o PostgreSQL */

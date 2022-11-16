@@ -16,9 +16,9 @@ class Principal
     public $var1;
     public $var2;
 
-
     function Executa()
     {
+        $var3 = $var5 = '';
         $this->Prepara();
         eval($this->Verifica());
         $var6 = (object)['var5'=>$var5,'var3'=>$var3];

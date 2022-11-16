@@ -1,6 +1,6 @@
 <?php
 /**
-*** 99242991 | Lúcio ALEXANDRE Correia dos Santos
+*** lucioacsantos@gmail.com | Lúcio ALEXANDRE Correia dos Santos
 **/
 
 $idtb_om_apoiadas = $_SESSION['id_om_apoiada'];

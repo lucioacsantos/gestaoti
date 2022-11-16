@@ -1,6 +1,6 @@
 <?php
 /**
-*** 99242991 | Lúcio ALEXANDRE Correia dos Santos
+*** lucioacsantos@gmail.com | Lúcio ALEXANDRE Correia dos Santos
 **/
 
 /* Classe de interação com o PostgreSQL */
@@ -26,7 +26,7 @@ echo"
     <meta charset=\"utf-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
     <meta name=\"description\" content=\"Sistema Integrado para Centros Locais de Tecnologia da Informação\">
-    <meta name=\"author\" content=\"99242991 Lúcio ALEXANDRE Correia dos Santos\">
+    <meta name=\"author\" content=\"lucioacsantos@gmail.com Lúcio ALEXANDRE Correia dos Santos\">
 
     <title>...::: SisCLTI :::...</title>
 

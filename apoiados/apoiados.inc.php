@@ -1,6 +1,6 @@
 <?php
 /**
-*** 99242991 | Lúcio ALEXANDRE Correia dos Santos
+*** lucioacsantos@gmail.com | Lúcio ALEXANDRE Correia dos Santos
 **/
 
 /* Classe de interação com o PostgreSQL */
@@ -147,7 +147,7 @@ if ($act == 'insert') {
             }    
             else {
                 echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
-                echo(pg_result_error($row) . "<br />\n");
+                echo(($row) . "<br />\n");
             }
         }
 
@@ -161,7 +161,7 @@ if ($act == 'insert') {
     
             else {
                 echo "<h5>Ocorreu algum erro, tente novamente.</h5>";
-                echo(pg_result_error($row) . "<br />\n");
+                echo(($row) . "<br />\n");
             }
         }
     }

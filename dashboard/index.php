@@ -3,6 +3,10 @@
 *** lucioacsantos@gmail.com | Lúcio ALEXANDRE Correia dos Santos
 **/
 
+
+
+
+
 /* Clasee de interação com o PostgreSQL */
 require_once "../class/constantes.inc.php";
 $config = new Config();
